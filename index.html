@@ -279,51 +279,6 @@
   }
   .gospel-trigger-btn:hover { transform: scale(1.06); }
 
-  /* ══ FINGERPRINT BUTTON ══ */
-  .lock-fp-btn {
-    display: flex; flex-direction: column; align-items: center; gap: 14px;
-    width: 100%; padding: 28px 20px;
-    background: rgba(201,168,76,0.07);
-    border: 1.5px solid rgba(201,168,76,0.28);
-    border-radius: 16px; cursor: pointer;
-    color: var(--gold-light);
-    transition: all 0.25s;
-    margin-bottom: 6px;
-  }
-  .lock-fp-btn:hover { background: rgba(201,168,76,0.14); border-color: rgba(201,168,76,0.5); transform: scale(1.02); }
-  .lock-fp-btn:active { transform: scale(0.97); }
-  .lock-fp-btn svg { transition: filter 0.3s; }
-  .lock-fp-btn:hover svg { filter: drop-shadow(0 0 10px rgba(201,168,76,0.6)); }
-  .lock-fp-btn span {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(11px, 1.3vw, 13px);
-    letter-spacing: 3px; text-transform: uppercase;
-    color: var(--gold); opacity: 0.8;
-  }
-  .lock-fp-btn.scanning svg { animation: fpPulse 1.2s ease-in-out infinite; }
-  .lock-fp-btn.success { border-color: rgba(80,200,120,0.6); background: rgba(80,200,120,0.08); }
-  .lock-fp-btn.success svg { stroke: rgba(80,200,120,0.9); filter: drop-shadow(0 0 12px rgba(80,200,120,0.5)); }
-  .lock-fp-btn.fail { border-color: rgba(220,80,80,0.6); animation: lockShake 0.4s ease; }
-  .lock-fp-hint {
-    text-align: center; font-size: clamp(13px,1.3vw,14px);
-    color: rgba(255,255,255,0.35); font-style: italic;
-    min-height: 18px; margin-bottom: 6px;
-  }
-  .lock-fp-fallback {
-    display: block; width: 100%; background: none; border: none;
-    cursor: pointer; text-align: center; padding: 10px 0 2px;
-    font-family: 'Cinzel', serif;
-    font-size: clamp(10px,1.1vw,11px);
-    letter-spacing: 2.5px; text-transform: uppercase;
-    color: rgba(201,168,76,0.4);
-    transition: color 0.2s;
-  }
-  .lock-fp-fallback:hover { color: rgba(201,168,76,0.75); }
-  @keyframes fpPulse {
-    0%,100% { filter: drop-shadow(0 0 4px rgba(201,168,76,0.3)); opacity: 0.7; }
-    50%      { filter: drop-shadow(0 0 16px rgba(201,168,76,0.8)); opacity: 1; }
-  }
-
   /* ══ QR CODE SECTION ══ */
   .qr-section {
     background: #07070f;
@@ -631,29 +586,8 @@
   <h1 class="lock-wordmark">Disciple<span>sheep</span></h1>
   <p class="lock-byline">by Ptr. Reynold Viernes</p>
 
-  <!-- FINGERPRINT VIEW -->
-  <div class="lock-card" id="lock-fp-card">
-    <p class="lock-card-label">Biometric Access</p>
-    <button class="lock-fp-btn" id="lock-fp-btn" onclick="lockFingerprintAuth()">
-      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" id="lock-fp-icon">
-        <path d="M12 1a9 9 0 0 0-9 9"/>
-        <path d="M3.5 15.5A9 9 0 0 0 12 21"/>
-        <path d="M21 10a9 9 0 0 0-9-9"/>
-        <path d="M20.5 15.5A9 9 0 0 0 21 10"/>
-        <path d="M12 7a5 5 0 0 0-5 5c0 2.5.5 4.5 1.5 6"/>
-        <path d="M12 7a5 5 0 0 1 5 5c0 1-.1 2-.3 2.9"/>
-        <path d="M12 11v2"/>
-        <path d="M12 17v.5"/>
-      </svg>
-      <span id="lock-fp-label">Touch to unlock</span>
-    </button>
-    <p class="lock-fp-hint" id="lock-fp-hint"></p>
-    <button class="lock-fp-fallback" id="lock-fp-fallback" onclick="lockShowPassword()">Use password instead</button>
-  </div>
-
-  <!-- PASSWORD VIEW -->
-  <div class="lock-card" id="lock-card" style="display:none">
-    <p class="lock-card-label" id="lock-pw-label">Enter Access Password</p>
+  <div class="lock-card" id="lock-card">
+    <p class="lock-card-label">Enter Access Password</p>
     <div class="lock-input-wrap">
       <input class="lock-input" id="lock-input" type="password"
         placeholder="Password" autocomplete="current-password"
@@ -669,7 +603,6 @@
     <p class="lock-error-msg" id="lock-error"></p>
     <p class="lock-attempts" id="lock-attempts"></p>
     <p class="lock-lockout-msg" id="lock-lockout">⏳ <span id="lock-countdown">30</span>s — too many attempts</p>
-    <button class="lock-fp-fallback" id="lock-back-fp" onclick="lockShowFingerprint()" style="display:none;margin-top:10px;">Use fingerprint instead</button>
   </div>
 </div>
 
@@ -1917,151 +1850,36 @@ document.addEventListener('keydown', e => {
 <script>
 /* ══ LOCK SCREEN ══ */
 (function () {
-  const HASH        = 'c1bfbb1848b3a7970cb33f4ff93b222a4e4c77d82dc92210e1e6e73fee6ad162';
+  const HASH = 'c1bfbb1848b3a7970cb33f4ff93b222a4e4c77d82dc92210e1e6e73fee6ad162';
   const SESSION_KEY = 'ds_unlocked';
-  const CRED_KEY    = 'ds_fp_cred';   // stores base64 credentialId
-  const RP_ID       = location.hostname || 'localhost';
-  const RP_NAME     = 'Disciplesheep Leader Guide';
   const MAX_ATTEMPTS = 3;
   const LOCKOUT_SECS = 30;
 
-  let attempts   = 0;
-  let lockedOut  = false;
+  let attempts = 0;
+  let lockedOut = false;
   let lockoutTimer = null;
   let eyeVisible = false;
-  let fpSupported = false;
 
-  /* ── helpers ──────────────────────────────────────────── */
   async function sha256(str) {
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
     return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
   }
-  function b64url(buf) {
-    return btoa(String.fromCharCode(...new Uint8Array(buf)))
-      .replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
-  }
-  function fromB64url(s) {
-    s = s.replace(/-/g,'+').replace(/_/g,'/');
-    return Uint8Array.from(atob(s), c => c.charCodeAt(0));
-  }
-  function unlockApp() {
-    sessionStorage.setItem(SESSION_KEY, '1');
-    const ls = document.getElementById('lock-screen');
-    ls.classList.add('unlocking');
-    setTimeout(() => ls.classList.add('hidden'), 620);
-  }
-  function setFpHint(msg) {
-    const el = document.getElementById('lock-fp-hint');
-    if (el) el.textContent = msg;
-  }
-  function setFpLabel(msg) {
-    const el = document.getElementById('lock-fp-label');
-    if (el) el.textContent = msg;
-  }
 
-  /* ── check biometric support ──────────────────────────── */
-  async function checkFpSupport() {
-    if (!window.PublicKeyCredential) return false;
-    if (!window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable) return false;
-    return await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
-  }
-
-  /* ── register fingerprint (called after password unlock) ─ */
-  async function registerFingerprint() {
-    try {
-      const userId = new Uint8Array(16);
-      crypto.getRandomValues(userId);
-      const cred = await navigator.credentials.create({
-        publicKey: {
-          rp: { id: RP_ID, name: RP_NAME },
-          user: { id: userId, name: 'leader', displayName: 'Leader' },
-          challenge: crypto.getRandomValues(new Uint8Array(32)),
-          pubKeyCredParams: [
-            { type: 'public-key', alg: -7  },
-            { type: 'public-key', alg: -257 }
-          ],
-          authenticatorSelection: {
-            authenticatorAttachment: 'platform',
-            userVerification: 'required',
-            residentKey: 'preferred'
-          },
-          timeout: 60000
-        }
-      });
-      if (cred) {
-        localStorage.setItem(CRED_KEY, b64url(cred.rawId));
-      }
-    } catch(e) { /* silently ignore — fingerprint registration optional */ }
-  }
-
-  /* ── authenticate with fingerprint ───────────────────── */
-  window.lockFingerprintAuth = async function () {
-    const btn = document.getElementById('lock-fp-btn');
-    btn.classList.add('scanning');
-    setFpLabel('Scanning…');
-    setFpHint('');
-    try {
-      const credIdB64 = localStorage.getItem(CRED_KEY);
-      const allowCreds = credIdB64
-        ? [{ type: 'public-key', id: fromB64url(credIdB64), transports: ['internal'] }]
-        : [];
-      await navigator.credentials.get({
-        publicKey: {
-          rpId: RP_ID,
-          challenge: crypto.getRandomValues(new Uint8Array(32)),
-          userVerification: 'required',
-          allowCredentials: allowCreds,
-          timeout: 60000
-        }
-      });
-      btn.classList.remove('scanning');
-      btn.classList.add('success');
-      setFpLabel('Verified ✓');
-      setTimeout(unlockApp, 400);
-    } catch(e) {
-      btn.classList.remove('scanning');
-      if (e.name === 'NotAllowedError') {
-        // User cancelled or timed out — offer password
-        setFpHint('Fingerprint cancelled.');
-        setFpLabel('Touch to retry');
-      } else {
-        btn.classList.add('fail');
-        setFpHint('Try again or use password.');
-        setFpLabel('Touch to unlock');
-        setTimeout(() => btn.classList.remove('fail'), 500);
-      }
-    }
-  };
-
-  /* ── show/hide views ──────────────────────────────────── */
-  window.lockShowPassword = function () {
-    document.getElementById('lock-fp-card').style.display = 'none';
-    document.getElementById('lock-card').style.display = 'block';
-    const backBtn = document.getElementById('lock-back-fp');
-    if (backBtn && fpSupported) backBtn.style.display = 'block';
-    setTimeout(() => document.getElementById('lock-input').focus(), 100);
-  };
-  window.lockShowFingerprint = function () {
-    document.getElementById('lock-card').style.display = 'none';
-    document.getElementById('lock-fp-card').style.display = 'block';
-  };
-
-  /* ── password submit ──────────────────────────────────── */
   window.lockSubmit = async function () {
     if (lockedOut) return;
     const input = document.getElementById('lock-input');
     const val = input.value.trim();
-    if (!val) { showError('Please enter the password.'); shakePw(); return; }
+    if (!val) { showError('Please enter the password.'); shake(); return; }
+
     const hash = await sha256(val);
     if (hash === HASH) {
-      // Register fingerprint on first password success (if supported)
-      if (fpSupported && !localStorage.getItem(CRED_KEY)) {
-        registerFingerprint();
-      }
-      unlockApp();
+      sessionStorage.setItem(SESSION_KEY, '1');
+      const ls = document.getElementById('lock-screen');
+      ls.classList.add('unlocking');
+      setTimeout(() => ls.classList.add('hidden'), 620);
     } else {
       attempts++;
-      shakePw();
+      shake();
       input.value = '';
       if (attempts >= MAX_ATTEMPTS) {
         startLockout();
@@ -2077,20 +1895,26 @@ document.addEventListener('keydown', e => {
   window.lockToggleEye = function () {
     eyeVisible = !eyeVisible;
     const input = document.getElementById('lock-input');
+    input.style.webkitTextSecurity = eyeVisible ? 'none' : 'disc';
+    input.style.textSecurity = eyeVisible ? 'none' : 'disc';
     input.type = eyeVisible ? 'text' : 'password';
     document.getElementById('lock-eye-icon').innerHTML = eyeVisible
       ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
       : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
   };
 
-  function showError(msg) { document.getElementById('lock-error').textContent = msg; }
-  function shakePw() {
+  function showError(msg) {
+    document.getElementById('lock-error').textContent = msg;
+  }
+
+  function shake() {
     const input = document.getElementById('lock-input');
     input.classList.remove('error');
     void input.offsetWidth;
     input.classList.add('error');
     setTimeout(() => input.classList.remove('error'), 500);
   }
+
   function startLockout() {
     lockedOut = true;
     document.getElementById('lock-card').classList.add('lock-locked-out');
@@ -2110,34 +1934,12 @@ document.addEventListener('keydown', e => {
     }, 1000);
   }
 
-  /* ── init ─────────────────────────────────────────────── */
-  (async function init() {
-    if (sessionStorage.getItem(SESSION_KEY) === '1') {
-      document.getElementById('lock-screen').classList.add('hidden');
-      return;
-    }
-    fpSupported = await checkFpSupport();
-    const hasCred = !!localStorage.getItem(CRED_KEY);
-
-    if (fpSupported && hasCred) {
-      // Fingerprint first — auto-trigger
-      document.getElementById('lock-fp-card').style.display = 'block';
-      document.getElementById('lock-card').style.display = 'none';
-      setTimeout(lockFingerprintAuth, 600);
-    } else if (fpSupported && !hasCred) {
-      // Supported but not yet registered — go straight to password
-      // After unlock, fingerprint will be registered for next time
-      document.getElementById('lock-fp-card').style.display = 'none';
-      document.getElementById('lock-card').style.display = 'block';
-      document.getElementById('lock-pw-label').textContent = 'Enter Access Password';
-      setTimeout(() => document.getElementById('lock-input').focus(), 700);
-    } else {
-      // Not supported — password only, hide fp card
-      document.getElementById('lock-fp-card').style.display = 'none';
-      document.getElementById('lock-card').style.display = 'block';
-      setTimeout(() => document.getElementById('lock-input').focus(), 700);
-    }
-  })();
+  // On load: check session
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    document.getElementById('lock-screen').classList.add('hidden');
+  } else {
+    setTimeout(() => document.getElementById('lock-input').focus(), 700);
+  }
 })();
 </script>
 
