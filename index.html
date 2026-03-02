@@ -1876,7 +1876,7 @@ document.addEventListener('keydown', e => {
       sessionStorage.setItem(SESSION_KEY, '1');
       const ls = document.getElementById('lock-screen');
       ls.classList.add('unlocking');
-      setTimeout(() => ls.classList.add('hidden'), 620);
+      setTimeout(() => { ls.classList.add('hidden'); window.scrollTo(0, 0); }, 620);
     } else {
       attempts++;
       shake();
@@ -1937,6 +1937,7 @@ document.addEventListener('keydown', e => {
   // On load: check session
   if (sessionStorage.getItem(SESSION_KEY) === '1') {
     document.getElementById('lock-screen').classList.add('hidden');
+    window.scrollTo(0, 0);
   } else {
     setTimeout(() => document.getElementById('lock-input').focus(), 700);
   }
