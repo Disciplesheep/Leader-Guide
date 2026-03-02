@@ -282,45 +282,115 @@
   /* ══ QR CODE SECTION ══ */
   .qr-section {
     background: #07070f;
-    padding: 48px 24px 56px;
+    padding: 52px 24px 64px;
     text-align: center;
     border-top: 1px solid rgba(201,168,76,0.12);
   }
-  .qr-label {
+  .qr-section-heading {
     font-family: 'Cinzel', serif;
-    font-size: clamp(11px,1.3vw,13px);
-    letter-spacing: 5px;
+    font-size: clamp(10px,1.2vw,12px);
+    letter-spacing: 6px;
     text-transform: uppercase;
     color: var(--gold);
-    opacity: 0.65;
-    margin-bottom: 24px;
+    opacity: 0.5;
+    margin-bottom: 36px;
+  }
+  /* Leader QR — centred, larger */
+  .qr-leader {
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 48px;
+  }
+  .qr-label {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(12px,1.4vw,15px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
   }
   .qr-frame {
     display: inline-block;
     padding: 14px;
     background: white;
     border-radius: 14px;
-    box-shadow: 0 0 40px rgba(201,168,76,0.18), 0 4px 24px rgba(0,0,0,0.5);
+    box-shadow: 0 0 40px rgba(201,168,76,0.22), 0 4px 24px rgba(0,0,0,0.5);
   }
   .qr-frame canvas, .qr-frame img { display: block; }
   .qr-sub {
-    margin-top: 20px;
+    margin-top: 16px;
     font-size: clamp(13px,1.4vw,15px);
-    color: rgba(255,255,255,0.38);
+    color: rgba(255,255,255,0.35);
     font-style: italic;
     letter-spacing: 0.3px;
   }
   .qr-link {
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 6px;
     font-family: 'Cinzel', serif;
-    font-size: clamp(11px,1.2vw,13px);
+    font-size: clamp(10px,1.1vw,12px);
     letter-spacing: 1.5px;
     color: var(--gold);
     opacity: 0.55;
     text-decoration: none;
   }
   .qr-link:hover { opacity: 0.9; }
+  /* Divider between Leader and Participant */
+  .qr-divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+    margin: 0 auto 40px;
+  }
+  .qr-divider-label {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(10px,1.2vw,12px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 28px;
+  }
+  /* Participant QR — stacked vertically, same as leader */
+  .qr-participant-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+  .qr-participant-item {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .qr-participant-label {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(12px,1.4vw,15px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .qr-participant-label.genz  { color: var(--genz); }
+  .qr-participant-label.mill  { color: var(--mill); }
+  .qr-participant-label.genx  { color: var(--genx); }
+  .qr-pframe {
+    display: inline-block;
+    padding: 14px;
+    background: white;
+    border-radius: 14px;
+  }
+  .qr-pframe.genz { box-shadow: 0 0 40px rgba(45,106,143,0.35), 0 4px 24px rgba(0,0,0,0.5); }
+  .qr-pframe.mill { box-shadow: 0 0 40px rgba(92,122,62,0.35), 0 4px 24px rgba(0,0,0,0.5); }
+  .qr-pframe.genx { box-shadow: 0 0 40px rgba(122,74,42,0.35), 0 4px 24px rgba(0,0,0,0.5); }
+  .qr-pframe canvas, .qr-pframe img { display: block; }
+  .qr-plink {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(10px,1.1vw,12px);
+    letter-spacing: 1.5px;
+    opacity: 0.55;
+    text-decoration: none;
+  }
+  .qr-plink.genz { color: var(--genz); }
+  .qr-plink.mill { color: var(--mill); }
+  .qr-plink.genx { color: var(--genx); }
+  .qr-plink:hover { opacity: 0.85; }
 
   /* ══ FULLSCREEN GOSPEL PLAYER ══ */
   #gospel-player {
@@ -629,12 +699,37 @@
 
   <!-- QR CODE SECTION -->
   <div class="qr-section">
-    <p class="qr-label">Leader's Guide</p>
-    <div class="qr-frame">
-      <div id="qr-code"></div>
+    <p class="qr-section-heading">Scan to Open</p>
+
+    <!-- Leader's Guide QR -->
+    <div class="qr-leader">
+      <p class="qr-label">Leader's Guide</p>
+      <div class="qr-frame">
+        <div id="qr-code"></div>
+      </div>
     </div>
-    <p class="qr-sub">Scan to open the full guide on any device</p>
-    <a class="qr-link" href="https://disciplesheep.github.io/Leader-Guide-v1/" target="_blank">disciplesheep.github.io/Leader-Guide-v1</a>
+
+    <div class="qr-divider"></div>
+    <p class="qr-divider-label">Participant Guides</p>
+
+    <!-- Participant Guides QR grid -->
+    <div class="qr-participant-grid">
+      <div class="qr-participant-item">
+        <p class="qr-participant-label genz">Gen Z</p>
+        <a href="https://disciplesheep.github.io/Participant-Guide-Gen-Z/" target="_blank" style="cursor:pointer"><div class="qr-pframe genz"><div id="qr-genz"></div></div></a>
+        <a class="qr-plink genz" href="https://disciplesheep.github.io/Participant-Guide-Gen-Z/" target="_blank">Participant · Gen Z</a>
+      </div>
+      <div class="qr-participant-item">
+        <p class="qr-participant-label mill">Millennials</p>
+        <a href="https://disciplesheep.github.io/Participant-Guide-Millennials/" target="_blank" style="cursor:pointer"><div class="qr-pframe mill"><div id="qr-mill"></div></div></a>
+        <a class="qr-plink mill" href="https://disciplesheep.github.io/Participant-Guide-Millennials/" target="_blank">Participant · Millennials</a>
+      </div>
+      <div class="qr-participant-item">
+        <p class="qr-participant-label genx">Gen X</p>
+        <a href="https://disciplesheep.github.io/Participant-Guide-Gen-X/" target="_blank" style="cursor:pointer"><div class="qr-pframe genx"><div id="qr-genx"></div></div></a>
+        <a class="qr-plink genx" href="https://disciplesheep.github.io/Participant-Guide-Gen-X/" target="_blank">Participant · Gen X</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1837,12 +1932,32 @@ document.addEventListener('keydown', e => {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
+  // Leader's Guide
   new QRCode(document.getElementById('qr-code'), {
     text: 'https://disciplesheep.github.io/Leader-Guide-v1/',
-    width: 180,
-    height: 180,
-    colorDark: '#1A1208',
-    colorLight: '#ffffff',
+    width: 180, height: 180,
+    colorDark: '#1A1208', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  // Participant — Gen Z
+  new QRCode(document.getElementById('qr-genz'), {
+    text: 'https://disciplesheep.github.io/Participant-Guide-Gen-Z/',
+    width: 180, height: 180,
+    colorDark: '#0D2233', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  // Participant — Millennials
+  new QRCode(document.getElementById('qr-mill'), {
+    text: 'https://disciplesheep.github.io/Participant-Guide-Millennials/',
+    width: 180, height: 180,
+    colorDark: '#1A2810', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  // Participant — Gen X
+  new QRCode(document.getElementById('qr-genx'), {
+    text: 'https://disciplesheep.github.io/Participant-Guide-Gen-X/',
+    width: 180, height: 180,
+    colorDark: '#1A0A04', colorLight: '#ffffff',
     correctLevel: QRCode.CorrectLevel.H
   });
 </script>
