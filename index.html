@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disciplesheep · Leader's Guide · By Ptr. Reynold Viernes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6EE;
+    --warm-white: #FFFDF8;
+    --gold: #C9A84C;
+    --gold-light: #E8D196;
+    --ink: #1A1208;
+    --ink-mid: #3D2A1A;
+    --brown: #5C3D2E;
+    --genz: #2D6A8F;
+    --mill: #5C7A3E;
+    --genx: #7A4A2A;
+    --real: #1F4E6B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+  input, textarea { -webkit-user-select: text; -moz-user-select: text; user-select: text; }
+  html { font-size: 21px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; overflow-x: hidden; line-height: 1.5; padding-bottom:calc(68px + env(safe-area-inset-bottom)); }
+
+  .screen { display:none; min-height:100vh; }
+  .screen.active { display:flex; flex-direction:column; }
+
+  .home-screen { justify-content:center; }
+  .home-hero { flex:1; min-height: calc(100vh - 68px); display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(160deg,#1A1208 0%,#3D2310 50%,#5C3D2E 100%); color:white; text-align:center; padding:48px 28px 32px; position:relative; overflow:hidden; }
+  .home-hero-inner { position:relative; }
+  .home-label { font-family:'Cinzel',serif; font-size:clamp(15px,1.8vw,20px); letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; opacity:0; animation:fadeUp 0.7s 0.1s forwards; }
+  .home-ministry { font-family:'Cinzel',serif; font-size:clamp(14px,1.3vw,17px); letter-spacing:3px; text-transform:uppercase; color:var(--gold-light); opacity:0; animation:fadeUp 0.7s 0.2s forwards; margin-bottom:24px; }
+  .home-title { font-family:'Playfair Display',serif; font-size:clamp(44px,8vw,80px); line-height:1.08; margin-bottom:14px; opacity:0; animation:fadeUp 0.7s 0.35s forwards; }
+  .home-title span { color:var(--gold); font-style:italic; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+  .main-nav { position:fixed; bottom:0; left:0; right:0; z-index:200; background:var(--warm-white); border-top:2px solid rgba(0,0,0,0.08); box-shadow:0 -2px 14px rgba(0,0,0,0.10); padding-bottom:env(safe-area-inset-bottom); }
+  .main-nav-inner { max-width:1000px; margin:0 auto; display:flex; }
+  .main-tab { flex:1; min-width:0; padding:13px 8px 11px; border:none; background:transparent; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:clamp(13px,1.5vw,16px); font-weight:600; letter-spacing:0.3px; text-transform:uppercase; color:#aaa; border-top:3px solid transparent; transition:all 0.22s; display:flex; flex-direction:column; align-items:center; gap:2px; }
+  .main-tab:hover { background:var(--cream); }
+  .tab-icon { font-size:clamp(21px,2.2vw,26px); line-height:1; }
+  .tab-label { font-size:clamp(11px,1.3vw,14px); letter-spacing:0.5px; }
+  .main-tab.active[data-guide="home"] { color:var(--gold); border-top-color:var(--gold); }
+  .main-tab.active[data-guide="genz"] { color:var(--genz); border-top-color:var(--genz); }
+  .main-tab.active[data-guide="mill"] { color:var(--mill); border-top-color:var(--mill); }
+  .main-tab.active[data-guide="genx"] { color:var(--genx); border-top-color:var(--genx); }
+  .main-tab.active[data-guide="real"] { color:var(--real); border-top-color:var(--real); }
+  .guide-screen { flex-direction:column; }
+  .guide-hero-full { min-height:calc(100vh - 68px); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:48px 28px 36px; position:relative; overflow:hidden; color:white; }
+  .guide-hero-full[data-g="genz"] { background:linear-gradient(150deg,#0D2233 0%,#1A3D54 50%,#2D6A8F 100%); }
+  .guide-hero-full[data-g="mill"] { background:linear-gradient(150deg,#1A2810 0%,#2A3D1A 50%,#5C7A3E 100%); }
+  .guide-hero-full[data-g="genx"] { background:linear-gradient(150deg,#1A0A04 0%,#3D1A08 50%,#7A4A2A 100%); }
+  .guide-hero-full[data-g="real"] { background:linear-gradient(155deg,#0A0A0A 0%,#1A1208 40%,#2C1A0A 70%,#1F4E6B 100%); }
+  .guide-hero-full-inner { position:relative; }
+  .gh-tag { font-family:'Cinzel',serif; font-size:clamp(14px,1.4vw,17px); letter-spacing:4px; text-transform:uppercase; color:var(--gold-light); margin-bottom:12px; opacity:0.8; }
+  .gh-title { font-family:'Playfair Display',serif; font-size:clamp(40px,6vw,64px); line-height:1.1; margin-bottom:8px; }
+  .gh-title em { color:var(--gold); font-style:italic; }
+  .gh-sub { font-size:clamp(16px,1.8vw,20px); color:rgba(255,255,255,0.65); font-style:italic; margin-bottom:16px; }
+  .gh-badges { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .gh-badge { padding:5px 13px; border:1px solid rgba(201,168,76,0.38); border-radius:100px; font-size:clamp(14px,1.3vw,16px); color:var(--gold-light); }
+
+  .session-picker { padding:24px 20px 16px; max-width:900px; margin:0 auto; width:100%; }
+  .picker-label { font-family:'Cinzel',serif; font-size:clamp(14px,1.2vw,16px); letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; opacity:0.8; }
+  .picker-grid { display:flex; flex-direction:column; gap:10px; }
+  .picker-card { background:white; border-radius:12px; padding:16px 18px; cursor:pointer; display:flex; align-items:center; gap:14px; box-shadow:0 1px 5px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.07); transition:all 0.2s; }
+  .picker-card:hover, .picker-card:active { transform:translateY(-2px); box-shadow:0 5px 18px rgba(0,0,0,0.12); }
+  .picker-num { width:38px; height:38px; border-radius:50%; color:white; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:15px; font-weight:600; flex-shrink:0; }
+  .picker-info { flex:1; }
+  .picker-title { font-weight:600; font-size:clamp(16px,1.6vw,20px); color:var(--ink); line-height:1.3; }
+  .picker-ref { font-size:clamp(14px,1.3vw,17px); opacity:0.45; margin-top:3px; font-style:italic; }
+  .picker-arr { opacity:0.25; font-size:18px; }
+  .content-screen { flex-direction:column; }
+  .content-back { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; background:var(--warm-white); border-bottom:1px solid rgba(0,0,0,0.07); font-family:'DM Sans',sans-serif; font-size:clamp(15px,1.4vw,18px); font-weight:500; color:var(--ink-mid); position:sticky; top:0; z-index:100; }
+  .back-left { display:flex; align-items:center; gap:8px; cursor:pointer; flex:1; max-width:fit-content; padding:6px 12px 6px 0; }
+  .back-left:hover { opacity:0.7; }
+
+  .timer-widget { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+  .timer-display { font-family:'Cinzel',serif; font-size:clamp(16px,2vw,20px); font-weight:600; color:var(--ink); letter-spacing:2px; min-width:72px; text-align:center; cursor:pointer; padding:4px 8px; border-radius:6px; transition:background 0.2s; }
+  .timer-display:hover { background:var(--cream); }
+  .timer-display.running { color:var(--genz); }
+  .timer-display.warning { color:#E06B9A; }
+  .timer-btn { width:34px; height:34px; border-radius:50%; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:15px; transition:all 0.18s; flex-shrink:0; }
+  .timer-play  { background:var(--genz); color:white; }
+  .timer-play:hover  { opacity:0.85; transform:scale(1.08); }
+  .timer-reset { background:var(--cream); color:var(--ink-mid); border:1px solid rgba(0,0,0,0.1); }
+  .timer-set-row { display:none; position:absolute; top:calc(100% + 6px); right:16px; background:white; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.14); border:1px solid rgba(0,0,0,0.08); padding:14px 16px; z-index:200; gap:8px; flex-wrap:wrap; align-items:center; min-width:220px; }
+  .timer-set-row.open { display:flex; }
+  .timer-preset { padding:7px 14px; border-radius:100px; border:1.5px solid rgba(0,0,0,0.1); background:white; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:var(--ink-mid); transition:all 0.18s; white-space:nowrap; }
+  .timer-preset:hover { border-color:var(--gold); color:var(--gold); }
+  .timer-preset.active-preset { background:var(--gold); color:white; border-color:var(--gold); }
+  .timer-custom-label { font-family:'Cinzel',serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); opacity:0.8; width:100%; margin-bottom:2px; }
+  .timer-custom-wrap { display:flex; gap:6px; align-items:center; width:100%; }
+  .timer-custom-input { width:60px; padding:6px 10px; border:1.5px solid rgba(0,0,0,0.15); border-radius:8px; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:600; text-align:center; outline:none; }
+  .timer-custom-input:focus { border-color:var(--gold); }
+  .timer-custom-sep { font-size:18px; font-weight:600; color:var(--ink-mid); opacity:0.4; }
+  .timer-set-btn { padding:7px 16px; border-radius:100px; border:none; background:var(--gold); color:white; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; cursor:pointer; }
+  .content-inner { max-width:860px; margin:0 auto; padding:24px 20px 40px; width:100%; }
+
+  .guide-details { max-width: 900px; margin: 0 auto; padding: 32px 22px 60px; width: 100%; }
+  .rw-howto-inner { display:grid; grid-template-columns:1fr 1fr; gap:22px; background:white; border-radius:10px; padding:20px; box-shadow:0 1px 6px rgba(0,0,0,0.06); margin-bottom:24px; }
+  @media(max-width:600px) { .rw-howto-inner { grid-template-columns:1fr; } }
+
+  .who-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:30px; }
+  @media(max-width:580px) { .who-grid { grid-template-columns:1fr; } }
+  .who-box { background:white; border-radius:10px; padding:22px; box-shadow:0 1px 6px rgba(0,0,0,0.06); }
+  .who-box[data-g="genz"] { border-top:3px solid var(--genz); }
+  .who-box[data-g="mill"] { border-top:3px solid var(--mill); }
+  .who-box[data-g="genx"] { border-top:3px solid var(--genx); }
+  .who-box h4 { font-family:'Cinzel',serif; font-size:clamp(15px,1.4vw,18px); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+  .who-box[data-g="genz"] h4 { color:var(--genz); }
+  .who-box[data-g="mill"] h4 { color:var(--mill); }
+  .who-box[data-g="genx"] h4 { color:var(--genx); }
+  .who-box p { font-size:clamp(17px,1.6vw,20px); line-height:1.55; opacity:0.78; }
+  .tip-list { list-style:none; }
+  .tip-list li { font-size:clamp(17px,1.6vw,20px); line-height:1.55; padding:5px 0 5px 28px; position:relative; opacity:0.8; }
+  .tip-list li::before { content:'→'; position:absolute; left:0; opacity:0.55; }
+
+  .book-note { border-radius:0 8px 8px 0; padding:12px 16px; margin-bottom:24px; font-size:clamp(17px,1.6vw,20px); line-height:1.55; font-style:italic; }
+  .book-note[data-g="genz"] { background:#EBF4FA; border-left:4px solid var(--genz); color:#1A3D54; }
+  .book-note[data-g="mill"] { background:#EDF4E8; border-left:4px solid var(--mill); color:#2A3D1A; }
+  .book-note[data-g="genx"] { background:#F6EDE5; border-left:4px solid var(--genx); color:#3D1A08; }
+
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(33px,3.5vw,42px); margin:38px 0 18px; padding-bottom:11px; }
+  .section-title[data-g="genz"] { border-bottom:2px solid rgba(45,106,143,0.18); color:#1A3D54; }
+  .section-title[data-g="mill"] { border-bottom:2px solid rgba(92,122,62,0.2); color:#2A3D1A; }
+  .section-title[data-g="genx"] { border-bottom:2px solid rgba(122,74,42,0.2); color:#3D1A08; }
+
+  .session-accordion { margin-bottom:11px; }
+  .session-toggle { width:100%; background:white; border-radius:10px; padding:17px 19px; text-align:left; cursor:pointer; display:flex; align-items:center; gap:13px; transition:all 0.2s; font-family:'DM Sans',sans-serif; }
+  .snum { width:35px; height:35px; border-radius:50%; color:white; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:15px; font-weight:600; flex-shrink:0; }
+  .snum[data-g="genz"] { background:var(--genz); }
+  .snum[data-g="mill"] { background:var(--mill); }
+  .snum[data-g="genx"] { background:var(--genx); }
+  .sinfo { flex:1; }
+  .s-title { font-weight:500; font-size:clamp(18px,1.7vw,22px); color:var(--ink); }
+  .s-ref { font-size:clamp(15px,1.4vw,18px); opacity:0.45; margin-top:2px; font-style:italic; }
+  .chevron { width:20px; height:20px; transition:transform 0.3s; opacity:0.35; flex-shrink:0; }
+  .session-body { background:white; border-top:none; border-radius:0 0 10px 10px; padding:0 20px; max-height:0; overflow:hidden; transition:max-height 0.5s ease, padding 0.3s; }
+  .session-body.open { max-height:9000px; padding:20px; }
+  .s-part { margin-bottom:14px; }
+  .s-part-label { font-family:'Cinzel',serif; font-size:clamp(13px,1.2vw,15px); letter-spacing:2px; text-transform:uppercase; font-weight:600; padding:3px 10px; border-radius:4px; display:inline-block; margin-bottom:7px; }
+  .s-part.connect .s-part-label  { background:#FEF3E2; color:#B45309; }
+  .s-part.discover .s-part-label { background:#EBF4FA; color:#1A5276; }
+  .s-part.apply .s-part-label    { background:#ECFDF5; color:#065F46; }
+  .s-part.pray .s-part-label     { background:#F5F3FF; color:#5B21B6; }
+  .s-part p { font-size:clamp(17px,1.6vw,20px); line-height:1.55; opacity:0.82; }
+  .s-questions { margin-top:7px; list-style:none; }
+  .s-questions li { font-size:clamp(17px,1.6vw,20px); line-height:1.55; padding:5px 0 5px 18px; position:relative; opacity:0.78; }
+  .s-questions li::before { content:'·'; position:absolute; left:5px; font-size:20px; line-height:1; opacity:0.35; }
+  .s-tip { background:#FFFBEB; border-left:3px solid var(--gold); padding:10px 13px; border-radius:0 6px 6px 0; font-size:clamp(16px,1.5vw,19px); line-height:1.5; font-style:italic; margin-top:10px; color:var(--brown); }
+
+  .group-tip { background:white; border-radius:10px; padding:22px; margin-top:34px; }
+  .group-tip h4 { font-family:'Cinzel',serif; font-size:clamp(14px,1.3vw,17px); letter-spacing:2px; text-transform:uppercase; margin-bottom:7px; }
+  .group-tip[data-g="genz"] h4 { color:var(--genz); }
+  .group-tip[data-g="mill"] h4 { color:var(--mill); }
+  .group-tip[data-g="genx"] h4 { color:var(--genx); }
+  .group-tip p { font-size:clamp(17px,1.6vw,20px); line-height:1.55; opacity:0.78; }
+
+  .footer-verse { text-align:center; padding:46px 24px; max-width:540px; margin:42px auto 0; }
+  .footer-verse p { font-family:'Playfair Display',serif; font-size:clamp(20px,2.2vw,26px); line-height:1.5; font-style:italic; }
+  .footer-verse cite { display:block; margin-top:11px; font-family:'Cinzel',serif; font-size:clamp(14px,1.5vw,16px); letter-spacing:2px; color:var(--gold); font-style:normal; }
+
+  .rw-howto { background:white; border-bottom:1px solid rgba(0,0,0,0.06); padding:26px 22px; }
+  .flow-pills { display:flex; flex-wrap:nowrap; gap:6px; align-items:center; margin-top:10px; overflow-x:auto; scrollbar-width:none; }
+  .pill { padding:5px 12px; border-radius:100px; font-size:clamp(15px,1.4vw,18px); font-weight:500; white-space:nowrap; }
+  .pill.connect  { background:#FEF3E2; color:#B45309; }
+  .pill.discover { background:#EBF4FA; color:#1A5276; }
+  .pill.apply    { background:#ECFDF5; color:#065F46; }
+  .pill.pray     { background:#F5F3FF; color:#5B21B6; }
+  .pill-arr      { font-size:13px; opacity:0.3; flex-shrink:0; }
+
+  .session-nav-bar { display:none; position:fixed; bottom:calc(68px + env(safe-area-inset-bottom)); left:0; right:0; z-index:150; background:var(--warm-white); border-top:1px solid rgba(0,0,0,0.08); box-shadow:0 -2px 12px rgba(0,0,0,0.07); padding:10px 0; transition:transform 0.3s ease, opacity 0.3s ease; }
+  .session-nav-bar.visible { display:block; }
+  .session-nav-bar.scrolled-away { transform:translateY(100%); opacity:0; pointer-events:none; }
+  .session-nav-label { font-family:'Cinzel',serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); padding:0 16px 6px; opacity:0.7; }
+  .session-nav-scroll { display:flex; gap:8px; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+  .session-nav-chip { flex-shrink:0; padding:7px 14px; border-radius:100px; border:1.5px solid rgba(0,0,0,0.1); background:white; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:clamp(14px,1.3vw,16px); font-weight:500; color:var(--ink-mid); transition:all 0.18s; white-space:nowrap; }
+  #screen-content .content-inner { padding-bottom: 130px; }
+
+  .rw-content { max-width:900px; margin:0 auto; padding:38px 22px 80px; }
+  .rw-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(248px,1fr)); gap:14px; margin-bottom:48px; }
+  .rw-card { background:white; border-radius:10px; padding:18px 18px 14px; box-shadow:0 1px 5px rgba(0,0,0,0.06); cursor:pointer; transition:all 0.2s; display:flex; gap:11px; align-items:flex-start; }
+  .rw-card:hover { transform:translateY(-3px); box-shadow:0 6px 18px rgba(0,0,0,0.1); }
+  .rw-card[data-cat="mental"]   { border-left:4px solid #5B8DD9; }
+  .rw-card[data-cat="social"]   { border-left:4px solid #E06B9A; }
+  .rw-card[data-cat="tech"]     { border-left:4px solid #7B68EE; }
+  .rw-card[data-cat="money"]    { border-left:4px solid #5C7A3E; }
+  .rw-card[data-cat="sex"]      { border-left:4px solid #C0392B; }
+  .rw-card[data-cat="politics"] { border-left:4px solid #1F4E6B; }
+  .rw-card[data-cat="creation"] { border-left:4px solid #2E8B57; }
+  .rw-card[data-cat="family"]   { border-left:4px solid #E67E22; }
+  .rw-card[data-cat="work"]     { border-left:4px solid #8B2E2E; }
+  .rw-card[data-cat="grief"]    { border-left:4px solid #555; }
+  .rw-card[data-cat="faith"]    { border-left:4px solid #C9A84C; }
+  .rw-card[data-cat="purpose"]  { border-left:4px solid #9B59B6; }
+  .rw-tnum { font-family:'Cinzel',serif; font-size:29px; font-weight:600; opacity:0.15; flex-shrink:0; margin-top:2px; }
+  .rw-tbody { flex:1; }
+  .rw-ttag { font-family:'Cinzel',serif; font-size:clamp(13px,1.2vw,15px); letter-spacing:2px; text-transform:uppercase; opacity:0.5; margin-bottom:3px; }
+  .rw-tbody h3 { font-family:'Playfair Display',serif; font-size:clamp(20px,2.1vw,24px); margin-bottom:3px; line-height:1.2; }
+  .rw-tbody p  { font-size:clamp(16px,1.5vw,19px); line-height:1.5; opacity:0.58; }
+  .rw-gen { display:inline-block; margin-top:7px; padding:3px 9px; background:var(--cream); border-radius:100px; font-size:clamp(14px,1.2vw,16px); opacity:0.65; }
+  .rw-thdr { border-radius:12px; padding:30px 26px; margin-bottom:18px; position:relative; overflow:hidden; color:white; }
+  .rw-thdr-num { position:absolute; right:16px; top:-6px; font-family:'Cinzel',serif; font-size:82px; font-weight:600; opacity:0.1; line-height:1; }
+  .rw-thdr .th-n { font-family:'Cinzel',serif; font-size:clamp(14px,1.3vw,16px); letter-spacing:3px; opacity:0.65; margin-bottom:6px; text-transform:uppercase; }
+  .rw-thdr h2 { font-family:'Playfair Display',serif; font-size:clamp(34px,4.2vw,48px); margin-bottom:5px; line-height:1.15; }
+  .rw-thdr .th-s { font-size:clamp(16px,1.6vw,20px); opacity:0.7; font-style:italic; margin-bottom:10px; }
+  .th-meta { display:flex; flex-wrap:wrap; gap:6px; }
+  .th-chip { padding:4px 10px; background:rgba(255,255,255,0.15); border-radius:100px; font-size:clamp(14px,1.3vw,17px); }
+  .rw-thdr[data-cat="mental"]   { background:linear-gradient(135deg,#1A2D4A,#3A6DB5); }
+  .rw-thdr[data-cat="social"]   { background:linear-gradient(135deg,#3D0E28,#A0325A); }
+  .rw-thdr[data-cat="tech"]     { background:linear-gradient(135deg,#1A1040,#4A3E9A); }
+  .rw-thdr[data-cat="money"]    { background:linear-gradient(135deg,#1A2E0E,#3E6028); }
+  .rw-thdr[data-cat="sex"]      { background:linear-gradient(135deg,#3D0A0A,#8B2020); }
+  .rw-thdr[data-cat="politics"] { background:linear-gradient(135deg,#0A1A2E,#1F4E6B); }
+  .rw-thdr[data-cat="creation"] { background:linear-gradient(135deg,#0A2A18,#1E6B42); }
+  .rw-thdr[data-cat="family"]   { background:linear-gradient(135deg,#3D1A00,#A05010); }
+  .rw-thdr[data-cat="work"]     { background:linear-gradient(135deg,#2A0A0A,#7A2020); }
+  .rw-thdr[data-cat="grief"]    { background:linear-gradient(135deg,#1A1A1A,#444); }
+  .rw-thdr[data-cat="faith"]    { background:linear-gradient(135deg,#2A1A00,#8B6000); }
+  .rw-thdr[data-cat="purpose"]  { background:linear-gradient(135deg,#1A0A2E,#6B2A8B); }
+  .rw-scard { background:white; border-radius:10px; padding:24px; box-shadow:0 1px 6px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.07); }
+  .rw-scripture { background:var(--cream); border-left:4px solid var(--gold); border-radius:0 8px 8px 0; padding:12px 15px; margin:14px 0; font-size:clamp(17px,1.6vw,20px); line-height:1.55; font-style:italic; color:var(--ink-mid); }
+  .rw-scripture cite { display:block; margin-top:4px; font-style:normal; font-family:'Cinzel',serif; font-size:clamp(13px,1.2vw,15px); letter-spacing:2px; color:var(--gold); }
+  .rw-note { background:#FFFBEB; border-left:3px solid var(--gold); border-radius:0 6px 6px 0; padding:10px 13px; margin-top:13px; font-size:clamp(16px,1.5vw,19px); line-height:1.55; color:var(--brown); font-style:italic; }
+  .rw-note strong { font-style:normal; }
+  .rw-divider { height:1px; background:linear-gradient(to right,transparent,rgba(0,0,0,0.1),transparent); margin:42px 0; }
+  .rw-accordion { margin-bottom: 14px; }
+  .rw-toggle { width:100%; background:white; border-radius:12px; padding:20px 22px; text-align:left; cursor:pointer; display:flex; align-items:center; gap:15px; border:1px solid rgba(0,0,0,0.09); box-shadow:0 1px 6px rgba(0,0,0,0.05); font-family:'DM Sans',sans-serif; transition:all 0.22s; }
+  .rw-toggle:hover { box-shadow:0 4px 16px rgba(0,0,0,0.1); transform:translateY(-1px); }
+  .rw-toggle.open { border-radius:12px 12px 0 0; border-bottom-color:transparent; }
+  .rw-tnum-badge { width:42px; height:42px; border-radius:50%; color:white; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:14px; font-weight:600; flex-shrink:0; }
+  .rw-tinfo { flex:1; }
+  .rw-ttitle { font-weight:600; font-size:clamp(18px,1.7vw,22px); color:var(--ink); }
+  .rw-tsub { font-size:clamp(15px,1.4vw,18px); opacity:0.48; margin-top:2px; font-style:italic; }
+  .rw-tbody-acc { background:white; border-radius:0 0 12px 12px; border:1px solid rgba(0,0,0,0.09); border-top:none; padding:0 22px; max-height:0; overflow:hidden; transition:max-height 0.5s ease, padding 0.3s; }
+  .rw-tbody-acc.open { max-height:9000px; padding:22px; }
+  .rw-final { background:linear-gradient(155deg,#1A1208 0%,#2C1A0A 50%,#1F4E6B 100%); color:white; border-radius:14px; padding:46px 30px; text-align:center; margin-top:52px; position:relative; overflow:hidden; }
+  .passage-block { background:var(--cream); border-radius:10px; padding:20px 22px; margin:16px 0; border:1px solid rgba(201,168,76,0.22); }
+  .passage-header { font-family:'Cinzel',serif; font-size:clamp(11px,1.2vw,13px); letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; opacity:0.8; }
+  .passage-text { font-family:'Playfair Display',serif; font-size:clamp(15px,1.6vw,18px); line-height:1.8; color:var(--ink-mid); }
+  .passage-text .vnum { font-family:'Cinzel',serif; font-size:0.72em; vertical-align:super; color:var(--gold); margin-right:2px; opacity:0.7; }
+  .passage-text mark { background:rgba(201,168,76,0.28); color:inherit; border-radius:3px; padding:0 2px; font-style:italic; }
+  .passage-text .vline { display:block; margin-bottom:6px; }
+  .passage-divider { text-align:center; color:var(--gold); opacity:0.4; margin:10px 0; font-size:18px; letter-spacing:4px; }
+
+  /* ══ GOSPEL SECTION (home screen) ══ */
+  .gospel-section {
+    background: linear-gradient(180deg, #1A1208 0%, #07070f 100%);
+    padding: 52px 24px 40px; text-align: center;
+  }
+  .gospel-section-label {
+    font-family: 'Cinzel', serif; font-size: clamp(11px,1.3vw,13px);
+    letter-spacing: 5px; text-transform: uppercase; color: var(--gold);
+    opacity: 0.65; margin-bottom: 10px;
+  }
+  .gospel-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px,4vw,46px); color: white; line-height: 1.15; margin-bottom: 8px;
+  }
+  .gospel-section-title em { color: var(--gold); font-style: italic; }
+  .gospel-section-sub {
+    font-size: clamp(14px,1.5vw,17px); color: rgba(255,255,255,0.42);
+    margin-bottom: 30px; font-style: italic;
+  }
+  .gospel-trigger-btn {
+    display: inline-flex; align-items: center; gap: 12px; padding: 17px 40px;
+    background: linear-gradient(135deg, #C9A84C 0%, #E8D196 50%, #C9A84C 100%);
+    background-size: 200% 100%; border: none; border-radius: 100px; cursor: pointer;
+    font-family: 'Cinzel', serif; font-size: clamp(13px,1.5vw,16px);
+    letter-spacing: 3px; text-transform: uppercase; color: #1A1208; font-weight: 700;
+    box-shadow: 0 0 40px rgba(201,168,76,0.5), 0 4px 20px rgba(0,0,0,0.4);
+    transition: all 0.3s; animation: pulseGold 3s ease-in-out infinite;
+  }
+  @keyframes pulseGold {
+    0%,100% { box-shadow: 0 0 28px rgba(201,168,76,0.4), 0 4px 20px rgba(0,0,0,0.4); }
+    50% { box-shadow: 0 0 60px rgba(201,168,76,0.75), 0 4px 20px rgba(0,0,0,0.4); }
+  }
+  .gospel-trigger-btn:hover { transform: scale(1.06); }
+
+  /* ══ FINGERPRINT BUTTON ══ */
+  .lock-fp-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    width: 100%; padding: 28px 20px;
+    background: rgba(201,168,76,0.07);
+    border: 1.5px solid rgba(201,168,76,0.28);
+    border-radius: 16px; cursor: pointer;
+    color: var(--gold-light);
+    transition: all 0.25s;
+    margin-bottom: 6px;
+  }
+  .lock-fp-btn:hover { background: rgba(201,168,76,0.14); border-color: rgba(201,168,76,0.5); transform: scale(1.02); }
+  .lock-fp-btn:active { transform: scale(0.97); }
+  .lock-fp-btn svg { transition: filter 0.3s; }
+  .lock-fp-btn:hover svg { filter: drop-shadow(0 0 10px rgba(201,168,76,0.6)); }
+  .lock-fp-btn span {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(11px, 1.3vw, 13px);
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); opacity: 0.8;
+  }
+  .lock-fp-btn.scanning svg { animation: fpPulse 1.2s ease-in-out infinite; }
+  .lock-fp-btn.success { border-color: rgba(80,200,120,0.6); background: rgba(80,200,120,0.08); }
+  .lock-fp-btn.success svg { stroke: rgba(80,200,120,0.9); filter: drop-shadow(0 0 12px rgba(80,200,120,0.5)); }
+  .lock-fp-btn.fail { border-color: rgba(220,80,80,0.6); animation: lockShake 0.4s ease; }
+  .lock-fp-hint {
+    text-align: center; font-size: clamp(13px,1.3vw,14px);
+    color: rgba(255,255,255,0.35); font-style: italic;
+    min-height: 18px; margin-bottom: 6px;
+  }
+  .lock-fp-fallback {
+    display: block; width: 100%; background: none; border: none;
+    cursor: pointer; text-align: center; padding: 10px 0 2px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(10px,1.1vw,11px);
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: rgba(201,168,76,0.4);
+    transition: color 0.2s;
+  }
+  .lock-fp-fallback:hover { color: rgba(201,168,76,0.75); }
+  @keyframes fpPulse {
+    0%,100% { filter: drop-shadow(0 0 4px rgba(201,168,76,0.3)); opacity: 0.7; }
+    50%      { filter: drop-shadow(0 0 16px rgba(201,168,76,0.8)); opacity: 1; }
+  }
+
+  /* ══ QR CODE SECTION ══ */
+  .qr-section {
+    background: #07070f;
+    padding: 48px 24px 56px;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.12);
+  }
+  .qr-label {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(11px,1.3vw,13px);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.65;
+    margin-bottom: 24px;
+  }
+  .qr-frame {
+    display: inline-block;
+    padding: 14px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 0 40px rgba(201,168,76,0.18), 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .qr-frame canvas, .qr-frame img { display: block; }
+  .qr-sub {
+    margin-top: 20px;
+    font-size: clamp(13px,1.4vw,15px);
+    color: rgba(255,255,255,0.38);
+    font-style: italic;
+    letter-spacing: 0.3px;
+  }
+  .qr-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(11px,1.2vw,13px);
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    opacity: 0.55;
+    text-decoration: none;
+  }
+  .qr-link:hover { opacity: 0.9; }
+
+  /* ══ FULLSCREEN GOSPEL PLAYER ══ */
+  #gospel-player {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: #07070f; overflow: hidden; flex-direction: column;
+  }
+  #gospel-player.open { display: flex; }
+
+  /* Force landscape via CSS transform when portrait on small screens */
+  @media (max-width: 767px) and (orientation: portrait) {
+    #gospel-player.open {
+      width: 100vh;
+      height: 100vw;
+      transform-origin: top left;
+      transform: rotate(90deg) translateY(-100%);
+      position: fixed;
+      top: 0; left: 0;
+    }
+  }
+
+  .gp-slide {
+    display: none; flex: 1; position: relative; overflow: hidden;
+    align-items: center; justify-content: center;
+  }
+  .gp-slide.active { display: flex; }
+
+  .gp-arrow {
+    position: absolute; top: 50%; z-index: 200;
+    transform: translateY(-50%);
+    width: 48px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border: none; background: transparent; padding: 0;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .gp-arrow.visible { opacity: 1; pointer-events: auto; }
+  .gp-arrow:disabled { opacity: 0 !important; pointer-events: none; }
+
+  .gp-arrow#gp-prev { left: 6px; }
+  .gp-arrow#gp-next { right: 6px; }
+
+  /* The chevron shape via SVG-style border trick */
+  .gp-arrow .chevron {
+    width: 22px; height: 22px;
+    border-top: 3px solid rgba(255,255,255,0.85);
+    border-right: 3px solid rgba(255,255,255,0.85);
+    border-radius: 2px;
+    transition: border-color 0.2s, transform 0.2s;
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.6));
+  }
+  .gp-arrow#gp-prev .chevron { transform: rotate(-135deg); }
+  .gp-arrow#gp-next .chevron { transform: rotate(45deg); }
+  .gp-arrow:hover .chevron { border-color: #f0d878; }
+  .gp-arrow#gp-prev:hover .chevron { transform: rotate(-135deg) scale(1.15); }
+  .gp-arrow#gp-next:hover .chevron { transform: rotate(45deg) scale(1.15); }
+  .gp-close {
+    position: absolute; z-index: 200; top: 14px; right: 16px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.8); font-size: 14px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .gp-close:hover { background: rgba(255,255,255,0.15); color: white; }
+
+  /* Verse popup */
+  .verse-popup {
+    position: absolute; left: 40px; right: 40px; z-index: 150;
+    background: rgba(4,4,12,0.97); border: 1px solid rgba(201,168,76,0.55);
+    border-radius: 14px; padding: 20px 26px;
+    font-family: 'Playfair Display', serif; font-size: clamp(16px,2.4vw,22px);
+    color: rgba(255,255,255,0.95); line-height: 1.7; font-style: italic;
+    transform: translateY(12px); opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    pointer-events: none; backdrop-filter: blur(20px);
+    bottom: 58px;
+  }
+  .verse-popup.show { transform: translateY(0); opacity: 1; }
+  .verse-cite { display: block; margin-top: 9px; font-style: normal; font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 2px; color: var(--gold); }
+  .verse-btn {
+    position: absolute; z-index: 50; padding: 6px 14px; border-radius: 100px;
+    border: 1px solid rgba(201,168,76,0.45); background: rgba(4,4,12,0.55);
+    color: var(--gold-light); font-family: 'Cinzel', serif; font-size: 11px;
+    letter-spacing: 2px; cursor: pointer; transition: all 0.2s; backdrop-filter: blur(10px);
+    text-transform: uppercase; bottom: 60px;
+  }
+  .verse-btn:hover { background: rgba(201,168,76,0.2); border-color: var(--gold); }
+
+  /* ══ GOSPEL ANIMATIONS ══ */
+  @keyframes gFadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes gFadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes gScale { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+  @keyframes gScaleBounce { from{opacity:0;transform:scale(0.3)} to{opacity:1;transform:scale(1)} }
+  @keyframes gDraw { from{stroke-dashoffset:2000} to{stroke-dashoffset:0} }
+  @keyframes gFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  @keyframes gPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+  @keyframes gBeat { 0%,100%{transform:scale(1)} 25%{transform:scale(1.12)} 50%{transform:scale(0.96)} 75%{transform:scale(1.06)} }
+  @keyframes gOrbit { from{transform:rotate(0deg) translateX(38px) rotate(0deg)} to{transform:rotate(360deg) translateX(38px) rotate(-360deg)} }
+  @keyframes gCrossGlow { 0%,100%{filter:drop-shadow(0 0 12px rgba(201,168,76,0.7)) drop-shadow(0 0 24px rgba(201,168,76,0.3))} 50%{filter:drop-shadow(0 0 28px rgba(232,209,150,1)) drop-shadow(0 0 56px rgba(201,168,76,0.6))} }
+  @keyframes gShockwave { 0%{r:0;opacity:0.7} 100%{r:80;opacity:0} }
+  @keyframes gParticle { 0%{opacity:1;transform:translate(0,0) scale(1)} 100%{opacity:0;transform:translate(var(--px),var(--py)) scale(0)} }
+  @keyframes gMist { 0%,100%{opacity:0.12;transform:scaleX(1)} 50%{opacity:0.22;transform:scaleX(1.05)} }
+  @keyframes gRayRotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  @keyframes gCrackSplit { from{stroke-dashoffset:100} to{stroke-dashoffset:0} }
+  @keyframes gWalkAcross { 0%{transform:translateX(0)} 100%{transform:translateX(-90px)} }
+  @keyframes gKnock { 0%,100%{transform:rotate(0deg) translateX(0)} 30%{transform:rotate(-8deg) translateX(-3px)} 60%{transform:rotate(3deg) translateX(1px)} }
+  @keyframes gDoorOpen { from{transform:perspective(600px) rotateY(0deg)} to{transform:perspective(600px) rotateY(-55deg)} }
+  @keyframes gRiseStar { 0%{opacity:0;transform:translateY(6px) scale(0.5)} 50%{opacity:1;transform:translateY(-8px) scale(1.1)} 100%{opacity:0.7;transform:translateY(-2px) scale(1)} }
+  @keyframes gTextReveal { from{opacity:0;letter-spacing:8px} to{opacity:1;letter-spacing:3px} }
+
+  /* ══ LOCK SCREEN ══ */
+  #lock-screen {
+    position: fixed; inset: 0; z-index: 99999;
+    background: linear-gradient(160deg, #0a0804 0%, #1A1208 45%, #2a1a08 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 32px 28px;
+    transition: opacity 0.6s ease;
+  }
+  #lock-screen.unlocking {
+    opacity: 0; pointer-events: none;
+  }
+  #lock-screen.hidden { display: none; }
+
+  .lock-emblem {
+    margin-bottom: 10px;
+    animation: lockFadeUp 0.7s 0.1s both;
+  }
+  .lock-wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 6vw, 52px);
+    color: white; line-height: 1.1;
+    margin-bottom: 4px;
+    animation: lockFadeUp 0.7s 0.2s both;
+  }
+  .lock-wordmark span { color: var(--gold); font-style: italic; }
+  .lock-byline {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(10px, 1.2vw, 12px);
+    letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(201,168,76,0.55);
+    margin-bottom: 48px;
+    animation: lockFadeUp 0.7s 0.3s both;
+  }
+
+  .lock-card {
+    width: 100%; max-width: 380px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 20px;
+    padding: 32px 28px 28px;
+    backdrop-filter: blur(20px);
+    animation: lockFadeUp 0.7s 0.4s both;
+  }
+  .lock-card-label {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(10px, 1.2vw, 12px);
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); opacity: 0.7;
+    margin-bottom: 16px; text-align: center;
+  }
+
+  .lock-input-wrap {
+    position: relative; margin-bottom: 14px;
+  }
+  .lock-input {
+    width: 100%; padding: 15px 48px 15px 18px;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(201,168,76,0.25);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(15px, 1.6vw, 17px);
+    color: white; outline: none;
+    letter-spacing: 2px;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-text-security: disc;
+    text-security: disc;
+  }
+  .lock-input::placeholder { color: rgba(255,255,255,0.22); letter-spacing: 1px; }
+  .lock-input:focus {
+    border-color: rgba(201,168,76,0.6);
+    background: rgba(255,255,255,0.09);
+  }
+  .lock-input.error {
+    border-color: rgba(220,80,80,0.7);
+    animation: lockShake 0.4s ease;
+  }
+  .lock-toggle-eye {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.3); padding: 4px;
+    transition: color 0.2s; line-height: 1;
+  }
+  .lock-toggle-eye:hover { color: var(--gold-light); }
+
+  .lock-btn {
+    width: 100%; padding: 15px;
+    background: linear-gradient(135deg, #C9A84C 0%, #E8D196 50%, #C9A84C 100%);
+    background-size: 200% 100%;
+    border: none; border-radius: 12px; cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(12px, 1.4vw, 14px);
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #1A1208; font-weight: 700;
+    transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  }
+  .lock-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(201,168,76,0.45); }
+  .lock-btn:active { transform: translateY(0); }
+
+  .lock-error-msg {
+    text-align: center; margin-top: 14px;
+    font-size: clamp(13px, 1.3vw, 15px);
+    color: rgba(220,100,100,0.85);
+    min-height: 20px;
+    font-style: italic;
+    transition: opacity 0.3s;
+  }
+  .lock-attempts {
+    text-align: center; margin-top: 8px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px; letter-spacing: 2px;
+    color: rgba(201,168,76,0.4);
+  }
+
+  /* Locked-out state */
+  .lock-locked-out .lock-input,
+  .lock-locked-out .lock-btn { opacity: 0.35; pointer-events: none; }
+  .lock-lockout-msg {
+    display: none; text-align: center; margin-top: 14px;
+    font-family: 'Cinzel', serif; font-size: clamp(12px,1.3vw,14px);
+    letter-spacing: 2px; color: var(--gold); opacity: 0.6;
+  }
+  .lock-locked-out .lock-lockout-msg { display: block; }
+  .lock-locked-out .lock-error-msg { display: none; }
+
+  @keyframes lockFadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes lockShake {
+    0%,100% { transform: translateX(0); }
+    20%     { transform: translateX(-8px); }
+    40%     { transform: translateX(8px); }
+    60%     { transform: translateX(-6px); }
+    80%     { transform: translateX(4px); }
+  }
+</style>
+</head>
+<body>
+
+
+<!-- ══ LOCK SCREEN ══ -->
+<div id="lock-screen">
+  <div class="lock-emblem">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <rect x="10" y="22" width="28" height="20" rx="5" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="2"/>
+      <path d="M16 22v-6a8 8 0 0 1 16 0v6" stroke="rgba(201,168,76,0.7)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <circle cx="24" cy="32" r="3" fill="rgba(201,168,76,0.7)"/>
+      <line x1="24" y1="35" x2="24" y2="38" stroke="rgba(201,168,76,0.7)" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <h1 class="lock-wordmark">Disciple<span>sheep</span></h1>
+  <p class="lock-byline">by Ptr. Reynold Viernes</p>
+
+  <!-- FINGERPRINT VIEW -->
+  <div class="lock-card" id="lock-fp-card">
+    <p class="lock-card-label">Biometric Access</p>
+    <button class="lock-fp-btn" id="lock-fp-btn" onclick="lockFingerprintAuth()">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" id="lock-fp-icon">
+        <path d="M12 1a9 9 0 0 0-9 9"/>
+        <path d="M3.5 15.5A9 9 0 0 0 12 21"/>
+        <path d="M21 10a9 9 0 0 0-9-9"/>
+        <path d="M20.5 15.5A9 9 0 0 0 21 10"/>
+        <path d="M12 7a5 5 0 0 0-5 5c0 2.5.5 4.5 1.5 6"/>
+        <path d="M12 7a5 5 0 0 1 5 5c0 1-.1 2-.3 2.9"/>
+        <path d="M12 11v2"/>
+        <path d="M12 17v.5"/>
+      </svg>
+      <span id="lock-fp-label">Touch to unlock</span>
+    </button>
+    <p class="lock-fp-hint" id="lock-fp-hint"></p>
+    <button class="lock-fp-fallback" id="lock-fp-fallback" onclick="lockShowPassword()">Use password instead</button>
+  </div>
+
+  <!-- PASSWORD VIEW -->
+  <div class="lock-card" id="lock-card" style="display:none">
+    <p class="lock-card-label" id="lock-pw-label">Enter Access Password</p>
+    <div class="lock-input-wrap">
+      <input class="lock-input" id="lock-input" type="password"
+        placeholder="Password" autocomplete="current-password"
+        onkeydown="if(event.key==='Enter')lockSubmit()">
+      <button class="lock-toggle-eye" onclick="lockToggleEye()" title="Show/hide" tabindex="-1" id="lock-eye-btn">
+        <svg id="lock-eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </button>
+    </div>
+    <button class="lock-btn" onclick="lockSubmit()">Enter</button>
+    <p class="lock-error-msg" id="lock-error"></p>
+    <p class="lock-attempts" id="lock-attempts"></p>
+    <p class="lock-lockout-msg" id="lock-lockout">⏳ <span id="lock-countdown">30</span>s — too many attempts</p>
+    <button class="lock-fp-fallback" id="lock-back-fp" onclick="lockShowFingerprint()" style="display:none;margin-top:10px;">Use fingerprint instead</button>
+  </div>
+</div>
+
+<!-- ══ HOME SCREEN ══ -->
+<div class="screen active" id="screen-home">
+  <div class="home-hero">
+    <div class="home-hero-inner">
+      <p class="home-label">Leader's Guide</p>
+      <h1 class="home-title">Disciple<span>sheep</span></h1>
+      <p class="home-ministry">by Ptr. Reynold Viernes</p>
+    </div>
+  </div>
+
+  <!-- GOSPEL SECTION -->
+  <div class="gospel-section">
+    <p class="gospel-section-label">Evangelism Tool</p>
+    <h2 class="gospel-section-title">The <em>Gospel</em> Bridge</h2>
+    <p class="gospel-section-sub">A visual gospel presentation · based on the Navigators' Bridge</p>
+    <button class="gospel-trigger-btn" onclick="openGospel()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Present the Gospel
+    </button>
+  </div>
+
+  <!-- QR CODE SECTION -->
+  <div class="qr-section">
+    <p class="qr-label">Leader's Guide</p>
+    <div class="qr-frame">
+      <div id="qr-code"></div>
+    </div>
+    <p class="qr-sub">Scan to open the full guide on any device</p>
+    <a class="qr-link" href="https://disciplesheep.github.io/Leader-Guide-v1/" target="_blank">disciplesheep.github.io/Leader-Guide-v1</a>
+  </div>
+</div>
+
+<!-- ══ GUIDE SCREENS ══ -->
+<div class="screen" id="screen-genz">
+  <div class="guide-hero-full" data-g="genz">
+    <div class="guide-hero-full-inner">
+      <p class="gh-tag">Approach 1 of 3 · Leader's Guide</p>
+      <h2 class="gh-title">Discovery &amp; <em>Dialogue</em></h2>
+      <p class="gh-sub">Real Life, Real Faith · Book of Mark · 6 Sessions</p>
+      <div class="gh-badges"><span class="gh-badge">Gen Z · Ages 21–29</span><span class="gh-badge" onclick="document.getElementById('picker-genz').scrollIntoView({behavior:'smooth',block:'start'})" style="cursor:pointer">WPU &amp; PSU Students</span><span class="gh-badge">Coffee Shop · Campus · Home</span></div>
+    </div>
+  </div>
+  <div class="guide-details">
+    <div class="who-grid">
+      <div class="who-box" data-g="genz"><h4>Who They Are</h4><p>Gen Z (born 1997–2005) are digital natives who grew up with smartphones and a world that feels uncertain. They are deeply curious, socially conscious, and spiritually open — but suspicious of institutions and quick to detect inauthenticity. They respond to honest questions, real stories, and being treated as equals in the conversation.</p></div>
+      <div class="who-box" data-g="genz"><h4>Relationship-Building Tips</h4><ul class="tip-list"><li>Meet them where they are — coffee shop, campus canteen, or online. Don't start in a church setting.</li><li>Be curious about their world before talking about yours. Ask about their course, dreams, frustrations.</li><li>Don't have all the answers. "I don't know — let's figure it out together" builds more trust.</li><li>Keep sessions to 45–60 minutes maximum. Shorter and consistent beats longer and irregular.</li></ul></div>
+    </div>
+    <div class="book-note" data-g="genz">📖 <strong>Why Mark?</strong> It's the shortest gospel — action-packed, no long speeches. Jesus is always moving, always surprising. Perfect for a generation that values authenticity and action over ritual.</div>
+    <h2 class="section-title" data-g="genz">Session Series: "Real Life, Real Faith"</h2>
+    <div class="picker-grid" id="picker-genz"></div>
+    <div class="group-tip" data-g="genz"><h4>Group Meeting Tip</h4><p>Keep groups at 4–7 people. Use round table or floor seating over rows. Open every group with a fun icebreaker. End with a 'prayer request in one sentence' round. After Part 2, add a 5-min 'Share Round' — each person says one word that stood out. No pressure to explain.</p></div>
+    <div class="footer-verse" data-g="genz"><p>"Two are better than one, because they have a good return for their labor."</p><cite>— Ecclesiastes 4:9</cite></div>
+  </div>
+</div>
+
+<div class="screen" id="screen-mill">
+  <div class="guide-hero-full" data-g="mill">
+    <div class="guide-hero-full-inner">
+      <p class="gh-tag">Approach 2 of 3 · Leader's Guide</p>
+      <h2 class="gh-title">Life-Connect <em>Method</em></h2>
+      <p class="gh-sub">Life on Purpose · Psalms &amp; Proverbs · 6 Sessions</p>
+      <div class="gh-badges"><span class="gh-badge">Millennials · Ages 30–44</span><span class="gh-badge" onclick="document.getElementById('picker-mill').scrollIntoView({behavior:'smooth',block:'start'})" style="cursor:pointer">Working Professionals</span><span class="gh-badge">Home · Workplace · Life Group</span></div>
+    </div>
+  </div>
+  <div class="guide-details">
+    <div class="who-grid">
+      <div class="who-box" data-g="mill"><h4>Who They Are</h4><p>Millennials (born 1981–1996) are navigating adulting — careers, marriage, children, debt, and burnout. Many grew up with religion but drifted in young adulthood. They are drawn back by life experiences: marriage difficulties, the birth of a child, the loss of a parent, or a deep sense that something is missing. They want truth that works in real life, not just theory.</p></div>
+      <div class="who-box" data-g="mill"><h4>Relationship-Building Tips</h4><ul class="tip-list"><li>Earn trust through consistency, not charisma. Show up when you say you will. Remember what they told you last time.</li><li>Connect over shared life stages — parenting struggles, work pressure, identity questions.</li><li>Offer value before asking for investment. Help them move, share a resource, before inviting them.</li><li>Meet at the home or over a meal when possible — Millennials bond over shared food and real environments.</li></ul></div>
+    </div>
+    <div class="book-note" data-g="mill">📖 <strong>Why Psalms &amp; Proverbs?</strong> Millennials resonate with raw emotional honesty (Psalms) and practical wisdom for real-world decisions (Proverbs). These books meet them where they live.</div>
+    <h2 class="section-title" data-g="mill">Session Series: "Life on Purpose"</h2>
+    <div class="picker-grid" id="picker-mill"></div>
+    <div class="group-tip" data-g="mill"><h4>Group Meeting Tip</h4><p>Rotate hosts — this builds ownership and belonging faster than a static venue. Quarterly social events (dinner, game night, beach trip) deepen the study itself. Groups work best at 4–8 people. After Part 2, add a 5-min 'Share Round' where each person says one word that stood out. No pressure to explain.</p></div>
+    <div class="footer-verse" data-g="mill"><p>"And let us consider how we may spur one another on toward love and good deeds."</p><cite>— Hebrews 10:24</cite></div>
+  </div>
+</div>
+
+<div class="screen" id="screen-genx">
+  <div class="guide-hero-full" data-g="genx">
+    <div class="guide-hero-full-inner">
+      <p class="gh-tag">Approach 3 of 3 · Leader's Guide</p>
+      <h2 class="gh-title">Wisdom &amp; <em>Legacy</em></h2>
+      <p class="gh-sub">Unfinished Business · Ecclesiastes, Job &amp; Epistles · 6 Sessions</p>
+      <div class="gh-badges"><span class="gh-badge">Gen X · Ages 45–51</span><span class="gh-badge" onclick="document.getElementById('picker-genx').scrollIntoView({behavior:'smooth',block:'start'})" style="cursor:pointer">Mentorship &amp; Depth</span><span class="gh-badge">Home · Merienda · Mentorship Setting</span></div>
+    </div>
+  </div>
+  <div class="guide-details">
+    <div class="who-grid">
+      <div class="who-box" data-g="genx"><h4>Who They Are</h4><p>Gen X (born 1975–1980) are pragmatic, self-reliant, and quietly carrying a lot. By their mid-40s they may be dealing with aging parents, teenagers at home, career ceilings, and the early stirrings of legacy thinking. They are less likely to share publicly but deeply loyal in private. They respect earned trust, dislike hype, and respond to one-on-one sincerity.</p></div>
+      <div class="who-box" data-g="genx"><h4>Relationship-Building Tips</h4><ul class="tip-list"><li>Never talk down to them. They are wise, experienced, and may know more than you. Lead with deep respect.</li><li>Show genuine interest in their story — what they've built, survived, and learned.</li><li>Share a meal in their home or take them to a familiar local place — not a trendy coffee shop.</li><li>The best entry point: ask them to share wisdom with you. Gen X thrives when valued for their experience.</li></ul></div>
+    </div>
+    <div class="book-note" data-g="genx">📖 <strong>Why Ecclesiastes &amp; Job?</strong> These books wrestle honestly with disappointment, mortality, and the search for meaning — exactly where Gen X lives in midlife.</div>
+    <h2 class="section-title" data-g="genx">Session Series: "Unfinished Business"</h2>
+    <div class="picker-grid" id="picker-genx"></div>
+    <div class="group-tip" data-g="genx"><h4>Group Meeting Tip</h4><p>Gen X groups are best at 3–5 people. A living room or veranda with merienda is ideal. No projectors needed. End with a 'one-word prayer' round. These are slow, deep sessions — allow silence.</p></div>
+    <div class="footer-verse" data-g="genx"><p>"And the things you have heard me say in the presence of many witnesses entrust to reliable people who will also be qualified to teach others."</p><cite>— 2 Timothy 2:2</cite></div>
+  </div>
+</div>
+
+<div class="screen" id="screen-real">
+  <div class="guide-hero-full" data-g="real">
+    <div class="guide-hero-full-inner">
+      <p class="gh-tag">All Generations · Leader's Guide</p>
+      <h2 class="gh-title">Faith &amp; the <em>Real World</em></h2>
+      <p class="gh-sub">12 Bible Study Topics on Present Issues &amp; Trends</p>
+      <div class="gh-badges"><span class="gh-badge">1-on-1 &amp; Small Group</span><span class="gh-badge" onclick="document.getElementById('picker-real').scrollIntoView({behavior:'smooth',block:'start'})" style="cursor:pointer">All Generations</span><span class="gh-badge">45–75 min per session</span></div>
+    </div>
+  </div>
+  <div class="guide-details">
+    <div class="rw-howto-inner" style="margin-bottom:24px;">
+      <div><h3 style="font-family:'Cinzel',serif;font-size:clamp(12px,1.3vw,14px);letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">How to Use This Material</h3><p style="font-size:clamp(15px,1.6vw,17px);line-height:1.55;opacity:0.75;">These 12 topics are drawn from real pressures and conversations happening in Puerto Princesa right now. Each covers one session (45–75 min) for 1-on-1 or small group use. No prior Bible knowledge needed.</p></div>
+      <div><h3 style="font-family:'Cinzel',serif;font-size:clamp(12px,1.3vw,14px);letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;">Session Flow</h3><div class="flow-pills"><span class="pill connect">Connect</span><span class="pill-arr">→</span><span class="pill discover">Discover</span><span class="pill-arr">→</span><span class="pill apply">Apply</span><span class="pill-arr">→</span><span class="pill pray">Pray</span></div></div>
+    </div>
+    <div class="picker-grid" id="picker-real"></div>
+    <div class="rw-final" style="margin-top:36px;"><div style="position:relative;">
+      <h3>A Final Word</h3>
+      <p>These twelve topics are twelve doors into real life. Behind each one is a real person asking: <em>Does God care about this? Is there someone safe enough for me to be honest with?</em></p>
+      <p style="margin-top:14px;font-size:clamp(13px,1.9vw,16px);opacity:0.72;">You are that safe person. The curriculum is just the invitation.</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══ CONTENT SCREEN ══ -->
+<div class="screen" id="screen-content">
+  <div class="content-back">
+    <div class="back-left" onclick="goBack()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span id="content-back-label">Back</span>
+    </div>
+    <div class="timer-widget" style="position:relative;">
+      <button class="timer-btn timer-reset" onclick="timerReset()" title="Reset">↺</button>
+      <span class="timer-display" id="timer-display" onclick="timerToggleSet()" title="Tap to set time">45:00</span>
+      <button class="timer-btn timer-play" id="timer-play-btn" onclick="timerToggle()" title="Play / Pause">▶</button>
+      <div class="timer-set-row" id="timer-set-row">
+        <div class="timer-custom-label">Quick Set</div>
+        <button class="timer-preset" onclick="timerSetMin(15)">15 min</button>
+        <button class="timer-preset" onclick="timerSetMin(30)">30 min</button>
+        <button class="timer-preset active-preset" onclick="timerSetMin(45)">45 min</button>
+        <button class="timer-preset" onclick="timerSetMin(60)">60 min</button>
+        <button class="timer-preset" onclick="timerSetMin(75)">75 min</button>
+        <div class="timer-custom-label" style="margin-top:6px;">Custom</div>
+        <div class="timer-custom-wrap">
+          <input class="timer-custom-input" id="timer-custom-min" type="number" min="0" max="99" value="45" placeholder="mm">
+          <span class="timer-custom-sep">:</span>
+          <input class="timer-custom-input" id="timer-custom-sec" type="number" min="0" max="59" value="00" placeholder="ss">
+          <button class="timer-set-btn" onclick="timerSetCustom()">Set</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-inner" id="content-inner"></div>
+  <div class="session-nav-bar" id="session-nav-bar">
+    <div class="session-nav-label"></div>
+    <div class="session-nav-scroll" id="session-nav-scroll"></div>
+  </div>
+</div>
+
+<!-- ══ GOSPEL PLAYER ══ -->
+<div id="gospel-player">
+  <button class="gp-close" onclick="closeGospel()">✕</button>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 1 · GOD
+       A luminous, cosmic scene — God as creator,
+       radiating light, with a glowing heart above
+       a beautifully rendered human silhouette
+  ════════════════════════════════════════════ -->
+  <div class="gp-slide active" id="gs-1">
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <!-- Deep cosmic background gradient -->
+        <radialGradient id="s1bg" cx="50%" cy="35%" r="70%">
+          <stop offset="0%" stop-color="#0d1f3c"/>
+          <stop offset="55%" stop-color="#070d1c"/>
+          <stop offset="100%" stop-color="#03060f"/>
+        </radialGradient>
+        <!-- Divine light burst -->
+        <radialGradient id="s1divLight" cx="50%" cy="32%" r="45%">
+          <stop offset="0%" stop-color="#f5e6a8" stop-opacity="0.55"/>
+          <stop offset="40%" stop-color="#c9a84c" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Person gradient fill -->
+        <linearGradient id="s1person" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e8d196"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.6"/>
+        </linearGradient>
+        <!-- Heart gradient -->
+        <radialGradient id="s1heart" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#ff9ec4"/>
+          <stop offset="100%" stop-color="#d4367a"/>
+        </radialGradient>
+        <!-- Rotating rays clip -->
+        <clipPath id="s1clip"><rect width="800" height="450"/></clipPath>
+      </defs>
+
+      <!-- Sky background -->
+      <rect width="800" height="450" fill="url(#s1bg)"/>
+
+      <!-- Nebula clouds -->
+      <ellipse cx="400" cy="145" rx="280" ry="140" fill="rgba(60,100,200,0.06)" style="animation:gMist 8s ease-in-out infinite"/>
+      <ellipse cx="400" cy="145" rx="200" ry="90" fill="rgba(80,140,240,0.05)" style="animation:gMist 6s 2s ease-in-out infinite"/>
+
+      <!-- Stars field -->
+      <g opacity="0.9" style="animation:gFadeIn 2s 0.2s both">
+        <circle cx="60" cy="30" r="1.2" fill="white" opacity="0.8"/>
+        <circle cx="140" cy="18" r="0.8" fill="white" opacity="0.6"/>
+        <circle cx="230" cy="42" r="1.5" fill="white" opacity="0.7"/>
+        <circle cx="310" cy="12" r="1" fill="white" opacity="0.9"/>
+        <circle cx="420" cy="28" r="0.7" fill="white" opacity="0.5"/>
+        <circle cx="510" cy="20" r="1.3" fill="white" opacity="0.8"/>
+        <circle cx="600" cy="38" r="0.9" fill="white" opacity="0.7"/>
+        <circle cx="690" cy="15" r="1.1" fill="white" opacity="0.6"/>
+        <circle cx="755" cy="50" r="0.8" fill="white" opacity="0.9"/>
+        <circle cx="85" cy="70" r="1" fill="white" opacity="0.5"/>
+        <circle cx="175" cy="85" r="1.4" fill="white" opacity="0.7"/>
+        <circle cx="340" cy="65" r="0.8" fill="white" opacity="0.8"/>
+        <circle cx="465" cy="55" r="1.1" fill="white" opacity="0.6"/>
+        <circle cx="580" cy="72" r="0.9" fill="white" opacity="0.8"/>
+        <circle cx="720" cy="82" r="1.2" fill="white" opacity="0.5"/>
+        <!-- Twinkling stars -->
+        <circle cx="260" cy="35" r="1.8" fill="white" opacity="0.9" style="animation:gPulse 2.5s ease-in-out infinite"/>
+        <circle cx="550" cy="25" r="1.5" fill="#e8d196" opacity="0.9" style="animation:gPulse 3.2s 0.8s ease-in-out infinite"/>
+        <circle cx="700" cy="55" r="1.4" fill="white" opacity="0.8" style="animation:gPulse 2.8s 1.4s ease-in-out infinite"/>
+      </g>
+
+      <!-- Divine light burst from above -->
+      <ellipse cx="400" cy="140" rx="320" ry="200" fill="url(#s1divLight)" style="animation:gPulse 4s ease-in-out infinite"/>
+
+      <!-- Rotating golden rays (behind person) -->
+      <g style="transform-origin:400px 145px;animation:gRayRotate 40s linear infinite;opacity:0;animation:gFadeIn 1.5s 0.5s both,gRayRotate 40s 1.5s linear infinite">
+        <line x1="400" y1="30" x2="400" y2="-40" stroke="rgba(201,168,76,0.12)" stroke-width="2"/>
+        <line x1="400" y1="30" x2="450" y2="-35" stroke="rgba(201,168,76,0.09)" stroke-width="1.5"/>
+        <line x1="400" y1="30" x2="490" y2="-15" stroke="rgba(201,168,76,0.07)" stroke-width="1.5"/>
+        <line x1="400" y1="30" x2="350" y2="-35" stroke="rgba(201,168,76,0.09)" stroke-width="1.5"/>
+        <line x1="400" y1="30" x2="310" y2="-15" stroke="rgba(201,168,76,0.07)" stroke-width="1.5"/>
+        <line x1="400" y1="30" x2="480" y2="10" stroke="rgba(201,168,76,0.06)" stroke-width="1"/>
+        <line x1="400" y1="30" x2="320" y2="10" stroke="rgba(201,168,76,0.06)" stroke-width="1"/>
+      </g>
+
+      <!-- Person removed — word-only presentation -->
+
+      <!-- Heart — rich illustrated heart, pulsing -->
+      <g style="transform-origin:400px 130px; animation:gFadeIn 0s 0s both; opacity:0; animation:gScale 0.8s 1.4s cubic-bezier(0.34,1.56,0.64,1) both, gBeat 2.8s 2.3s ease-in-out infinite">
+        <!-- Heart shadow/glow -->
+        <ellipse cx="400" cy="140" rx="52" ry="38" fill="rgba(212,54,122,0.18)" style="filter:blur(8px)"/>
+        <!-- Main heart shape -->
+        <path d="M400,158
+                 C400,158 358,132 358,108
+                 C358,94 368,86 378,86
+                 C387,86 395,91 400,98
+                 C405,91 413,86 422,86
+                 C432,86 442,94 442,108
+                 C442,132 400,158 400,158Z"
+          fill="url(#s1heart)"/>
+        <!-- Heart highlight -->
+        <path d="M378,96 C374,100 372,106 374,113" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Inner glow -->
+        <path d="M400,152
+                 C400,152 365,130 365,111
+                 C365,102 371,96 378,96" fill="none" stroke="rgba(255,200,220,0.3)" stroke-width="1.5"/>
+      </g>
+
+      <!-- Orbital particles -->
+      <g style="transform-origin:400px 145px;animation:gFadeIn 0.5s 2s both;opacity:0">
+        <circle r="3.5" fill="#e8d196" opacity="0.8" style="transform-origin:400px 145px;animation:gOrbit 6s 2s linear infinite"/>
+        <circle r="2.5" fill="#c9a84c" opacity="0.6" style="transform-origin:400px 145px;animation:gOrbit 9s 2.5s linear infinite reverse"/>
+        <circle r="2" fill="white" opacity="0.7" style="transform-origin:400px 145px;animation:gOrbit 12s 3s linear infinite;transform:rotate(120deg) translateX(38px) rotate(-120deg)"/>
+      </g>
+
+      <!-- YOU label — left side -->
+      <text x="140" y="230" text-anchor="middle" font-family="Cinzel,serif" font-size="52" letter-spacing="6" fill="rgba(200,180,220,0.75)" opacity="0" style="animation:gTextReveal 1s 0.8s both">YOU</text>
+      <text x="140" y="262" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="15" fill="rgba(255,255,255,0.4)" opacity="0" style="animation:gFadeUp 0.8s 1.1s both">humanity</text>
+
+      <!-- GOD label — right side -->
+      <text x="660" y="230" text-anchor="middle" font-family="Cinzel,serif" font-size="52" letter-spacing="6" fill="#e8d196" opacity="0" style="animation:gTextReveal 1s 1s both">GOD</text>
+      <text x="660" y="262" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="15" fill="rgba(255,255,255,0.55)" opacity="0" style="animation:gFadeUp 0.8s 1.4s both">Life · Relationship · Purpose</text>
+      <!-- God loves label -->
+      <text x="400" y="370" text-anchor="middle" font-family="Playfair Display,serif" font-size="24" font-style="italic" fill="rgba(232,209,150,0.72)" opacity="0" style="animation:gFadeUp 0.8s 1.6s both">God loves you</text>
+    </svg>
+    <button class="verse-btn" style="right:24px;left:auto;transform:none" onclick="toggleVerse(1)">📖 Romans 6:23</button>
+    <div class="verse-popup" id="vp-1">
+      "For the wages of sin is death, but the free gift of God is eternal life in Christ Jesus our Lord."
+      <cite>— Romans 6:23</cite>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 2 · SIN
+       A person turning away, shadow growing,
+       a cracked / shattered heart, heavy mood
+  ════════════════════════════════════════════ -->
+  <div class="gp-slide" id="gs-2">
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="s2bg" cx="50%" cy="60%" r="80%">
+          <stop offset="0%" stop-color="#1a0808"/>
+          <stop offset="60%" stop-color="#0a0408"/>
+          <stop offset="100%" stop-color="#030208"/>
+        </radialGradient>
+        <linearGradient id="s2person" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8a7060"/>
+          <stop offset="100%" stop-color="#4a3020" stop-opacity="0.7"/>
+        </linearGradient>
+        <radialGradient id="s2heartL" cx="30%" cy="40%" r="70%">
+          <stop offset="0%" stop-color="#d4607a"/>
+          <stop offset="100%" stop-color="#7a1530"/>
+        </radialGradient>
+        <radialGradient id="s2shadow" cx="50%" cy="30%" r="60%">
+          <stop offset="0%" stop-color="#3a1010" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#0a0408" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="s2blur"><feGaussianBlur stdDeviation="12"/></filter>
+        <filter id="s2glowR"><feGaussianBlur stdDeviation="6"/></filter>
+      </defs>
+
+      <rect width="800" height="450" fill="url(#s2bg)"/>
+
+      <!-- Dark atmosphere -->
+      <ellipse cx="400" cy="200" rx="350" ry="200" fill="url(#s2shadow)" filter="url(#s2blur)"/>
+
+      <!-- Cracked ground lines -->
+      <g opacity="0" style="animation:gFadeIn 1.2s 0.3s both">
+        <path d="M200,400 Q260,390 290,400 L295,415 Q310,395 340,405" fill="none" stroke="rgba(100,60,40,0.4)" stroke-width="1.5"/>
+        <path d="M350,410 Q400,395 430,408 L440,420 Q460,400 500,412" fill="none" stroke="rgba(100,60,40,0.3)" stroke-width="1.2"/>
+        <path d="M500,405 Q540,395 570,408 L580,418" fill="none" stroke="rgba(100,60,40,0.35)" stroke-width="1.2"/>
+      </g>
+
+      <!-- Person removed — word-only presentation -->
+
+      <!-- Broken / shattered heart -->
+      <g style="opacity:0;animation:gScale 0.9s 1s cubic-bezier(0.34,1.56,0.64,1) both">
+        <!-- Shadow glow red -->
+        <ellipse cx="400" cy="130" rx="62" ry="46" fill="rgba(180,30,60,0.2)" filter="url(#s2glowR)"/>
+        <!-- Left half of heart -->
+        <path d="M400,158
+                 C400,158 362,134 360,112
+                 C359,96 368,88 378,88
+                 C388,88 396,93 400,100"
+          fill="url(#s2heartL)" opacity="0.75"/>
+        <!-- Right half of heart -->
+        <path d="M400,100
+                 C404,93 412,88 422,88
+                 C432,88 441,96 440,112
+                 C438,134 400,158 400,158"
+          fill="url(#s2heartL)" opacity="0.65"/>
+        <!-- Crack lines -->
+        <path d="M400,92 L395,104 L403,116 L397,130 L401,158" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-linecap="round"
+          style="stroke-dasharray:100;stroke-dashoffset:100;animation:gCrackSplit 0.6s 1.6s ease-out forwards"/>
+        <path d="M395,104 L388,108" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M403,116 L410,112" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Shards floating away -->
+        <g style="animation:gFadeUp 0.6s 2s both;opacity:0">
+          <path d="M378,94 L370,86 L376,84Z" fill="rgba(212,96,122,0.6)"/>
+          <path d="M422,94 L430,86 L426,84Z" fill="rgba(212,96,122,0.5)"/>
+          <path d="M363,118 L354,114 L356,108Z" fill="rgba(180,40,70,0.5)"/>
+          <path d="M437,118 L446,114 L444,108Z" fill="rgba(180,40,70,0.45)"/>
+        </g>
+      </g>
+
+      <!-- YOU label — left side -->
+      <text x="140" y="225" text-anchor="middle" font-family="Cinzel,serif" font-size="52" letter-spacing="6" fill="rgba(200,180,220,0.85)" opacity="0" style="animation:gTextReveal 1s 0.8s both">YOU</text>
+      <text x="140" y="258" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="rgba(255,255,255,0.45)" opacity="0" style="animation:gFadeUp 0.8s 1.2s both">Separation · Emptiness · Death</text>
+      <!-- Man sins label -->
+      <text x="400" y="200" text-anchor="middle" font-family="Playfair Display,serif" font-size="22" font-style="italic" fill="rgba(200,80,100,0.65)" opacity="0" style="animation:gFadeUp 0.8s 1.2s both">Man sins — falls short</text>
+    </svg>
+    <button class="verse-btn" style="left:24px;transform:none" onclick="toggleVerse(2)">📖 Romans 3:23</button>
+    <div class="verse-popup" id="vp-2">
+      "For all have sinned and fall short of the glory of God."
+      <cite>— Romans 3:23</cite>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 3 · THE CHASM
+       Two dramatic cliff edges — one lit (God),
+       one dark (humanity) — a deep chasm between,
+       failed bridges of human effort crumbling
+  ════════════════════════════════════════════ -->
+  <div class="gp-slide" id="gs-3">
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="s3bgTop" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#04060e"/>
+          <stop offset="100%" stop-color="#0a0510"/>
+        </linearGradient>
+        <!-- Left cliff (YOU side) - cooler, lower -->
+        <linearGradient id="s3cliffL" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#1a1020"/>
+          <stop offset="100%" stop-color="#251530"/>
+        </linearGradient>
+        <!-- Right cliff (GOD side) - warm lit, HIGHER -->
+        <linearGradient id="s3cliffR" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#1a2e50"/>
+          <stop offset="100%" stop-color="#243d68"/>
+        </linearGradient>
+        <!-- Chasm depth gradient -->
+        <linearGradient id="s3chasm" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#180010"/>
+          <stop offset="100%" stop-color="#050008"/>
+        </linearGradient>
+        <!-- God glow RIGHT -->
+        <radialGradient id="s3godGlow" cx="80%" cy="40%" r="35%">
+          <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="s3fog"><feGaussianBlur stdDeviation="18"/></filter>
+        <filter id="s3soft"><feGaussianBlur stdDeviation="4"/></filter>
+      </defs>
+
+      <rect width="800" height="450" fill="url(#s3bgTop)"/>
+
+      <!-- Deep chasm - fire pit / Lake of Fire -->
+      <rect x="285" y="0" width="230" height="450" fill="#000000"/>
+      <!-- Lake of Fire label -->
+      <text x="400" y="400" text-anchor="middle" font-family="Cinzel,serif" font-size="31" letter-spacing="3" fill="rgb(255, 255, 255)" opacity="0" style="animation:gFadeIn 0.8s 1s both">LAKE OF FIRE</text>
+
+      <!-- ANIMATED FIRE in the pit -->
+      <defs>
+        <radialGradient id="fireGlow" cx="50%" cy="80%" r="60%">
+          <stop offset="0%" stop-color="#ff6600" stop-opacity="0.9"/>
+          <stop offset="50%" stop-color="#ff2200" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#800000" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="emberGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffcc00"/>
+          <stop offset="100%" stop-color="#ff4400" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- Fire glow from below -->
+      <ellipse cx="400" cy="430" rx="110" ry="60" fill="url(#fireGlow)" style="animation:gPulse 0.8s ease-in-out infinite"/>
+      <ellipse cx="400" cy="440" rx="80" ry="40" fill="rgba(255,80,0,0.5)" style="animation:gPulse 0.6s 0.15s ease-in-out infinite"/>
+      <!-- Fire base -->
+      <ellipse cx="400" cy="448" rx="65" ry="18" fill="rgba(255,40,0,0.7)"/>
+      <!-- Fire flames — animated using CSS/SVG -->
+      <g style="animation:gPulse 0.5s ease-in-out infinite">
+        <path d="M355,450 Q360,400 370,370 Q375,340 370,320 Q385,360 382,390 Q388,350 395,320 Q400,290 400,270 Q405,300 405,335 Q410,360 418,385 Q416,355 422,330 Q430,360 428,395 Q435,370 440,350 Q445,380 445,450Z" fill="rgba(255,100,0,0.85)"/>
+      </g>
+      <g style="animation:gPulse 0.7s 0.1s ease-in-out infinite">
+        <path d="M365,450 Q370,410 378,385 Q382,360 378,340 Q390,370 388,400 Q395,365 400,340 Q403,315 403,300 Q408,325 408,355 Q415,375 420,400 Q418,365 426,340 Q432,370 432,420 Q438,390 442,370 Q445,400 445,450Z" fill="rgba(255,60,0,0.7)"/>
+      </g>
+      <g style="animation:gPulse 0.4s 0.2s ease-in-out infinite">
+        <path d="M375,450 Q378,420 385,400 Q390,375 387,360 Q396,385 394,410 Q400,380 403,360 Q406,340 406,325 Q410,345 410,370 Q416,390 420,415 Q418,385 425,360 Q430,385 430,440 Q433,415 437,395 Q440,418 440,450Z" fill="rgba(255,140,0,0.6)"/>
+      </g>
+      <!-- Embers rising -->
+      <g opacity="0.9" style="animation:gFadeUp 1s 1s both">
+        <circle cx="390" cy="340" r="2.5" fill="#ffcc44" style="animation:gRiseStar 2.1s 0.5s ease-out infinite"/>
+        <circle cx="405" cy="310" r="2" fill="#ff8800" style="animation:gRiseStar 1.8s 0.8s ease-out infinite"/>
+        <circle cx="415" cy="350" r="1.5" fill="#ffdd66" style="animation:gRiseStar 2.4s 0.3s ease-out infinite"/>
+        <circle cx="382" cy="330" r="1.8" fill="#ff6600" style="animation:gRiseStar 2s 1.1s ease-out infinite"/>
+        <circle cx="400" cy="300" r="2.2" fill="#ffaa00" style="animation:gRiseStar 1.6s 0.6s ease-out infinite"/>
+        <circle cx="422" cy="325" r="1.5" fill="#ff9900" style="animation:gRiseStar 2.2s 0.9s ease-out infinite"/>
+      </g>
+      <!-- Heat shimmer on sides of fire -->
+      <rect x="285" y="280" width="115" height="170" fill="rgba(255,50,0,0.07)" style="animation:gPulse 1.1s ease-in-out infinite"/>
+      <rect x="400" y="280" width="115" height="170" fill="rgba(255,50,0,0.07)" style="animation:gPulse 0.9s 0.3s ease-in-out infinite"/>
+
+      <!-- Left cliff — YOU's side, lower -->
+      <g style="animation:gFadeIn 0.7s 0.2s both;opacity:0">
+        <path d="M0,210 Q80,198 160,204 Q220,200 285,215 L285,450 L0,450Z" fill="url(#s3cliffL)"/>
+        <path d="M0,210 Q80,198 160,204 Q220,200 285,215" fill="none" stroke="rgba(160,120,200,0.35)" stroke-width="2"/>
+        <path d="M40,240 Q90,234 140,242" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <path d="M30,280 Q100,272 180,282 Q240,277 280,288" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      </g>
+
+      <!-- Right cliff — GOD's side, HIGHER -->
+      <g style="animation:gFadeIn 0.7s 0.3s both;opacity:0">
+        <path d="M515,120 Q580,105 680,98 Q740,95 800,102 L800,450 L515,450Z" fill="url(#s3cliffR)"/>
+        <path d="M515,120 Q580,105 680,98 Q740,95 800,102" fill="none" stroke="rgba(100,150,220,0.45)" stroke-width="2"/>
+        <path d="M535,155 Q600,147 680,154 Q740,149 795,158" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <path d="M520,210 Q600,200 700,212 Q760,207 795,216" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      </g>
+      <!-- God glow overlay on right -->
+      <ellipse cx="658" cy="250" rx="200" ry="200" fill="url(#s3godGlow)" style="animation:gPulse 5s ease-in-out infinite"/>
+
+      <!-- YOU label — left cliff -->
+      <g style="animation:gFadeUp 0.7s 0.5s both;opacity:0">
+        <text x="142" y="155" text-anchor="middle" font-family="Cinzel,serif" font-size="46" letter-spacing="6" fill="rgba(200,180,220,0.75)">YOU</text>
+        <text x="142" y="185" text-anchor="middle" font-family="Playfair Display,serif" font-size="15" font-style="italic" fill="rgba(200,150,200,0.55)">Man sins</text>
+      </g>
+
+      <!-- GOD label — right cliff (higher) -->
+      <g style="animation:gFadeUp 0.7s 0.6s both;opacity:0">
+        <text x="658" y="68" text-anchor="middle" font-family="Cinzel,serif" font-size="46" letter-spacing="6" fill="#e8d196">GOD</text>
+        <!-- Small divine light -->
+        <circle cx="658" cy="40" r="20" fill="rgba(201,168,76,0.10)" style="animation:gPulse 3s ease-in-out infinite"/>
+        <circle cx="658" cy="40" r="8" fill="rgba(201,168,76,0.25)" style="animation:gPulse 3s 0.5s ease-in-out infinite"/>
+        <circle cx="658" cy="40" r="3" fill="rgba(232,209,150,0.7)"/>
+      </g>
+
+      <!-- SIN label in chasm above fire -->
+      <g style="animation:gFadeIn 0.8s 0.8s both;opacity:0">
+        <text x="400" y="230" text-anchor="middle" font-family="Cinzel,serif" font-size="20" letter-spacing="4" fill="rgba(255,100,60,0.9)">SIN</text>
+        <!-- Downward arrows toward fire -->
+        <path d="M400,242 L400,265 M394,258 L400,266 L406,258" fill="none" stroke="rgba(255,100,60,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <!-- Verse btn on GOD side (left) -->
+    <button class="verse-btn" style="left:24px;transform:none" onclick="toggleVerse(3)">📖 Isaiah 59:2</button>
+    <div class="verse-popup" id="vp-3">
+      "Your iniquities have separated you from your God; your sins have hidden his face from you."
+      <cite>— Isaiah 59:2</cite>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 4 · THE CROSS
+       The cross bridges the two cliffs dramatically.
+       Drawn with stroke animation, golden glow,
+       a figure walking across it. CINEMATIC.
+  ════════════════════════════════════════════ -->
+  <div class="gp-slide" id="gs-4">
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice" id="s4svg">
+      <defs>
+        <linearGradient id="s4bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#060310"/>
+          <stop offset="50%" stop-color="#0d0608"/>
+          <stop offset="100%" stop-color="#030208"/>
+        </linearGradient>
+        <linearGradient id="s4cliffL" x1="1" y1="0" x2="0" y2="0">
+          <stop offset="0%" stop-color="#1e3358"/>
+          <stop offset="100%" stop-color="#152440"/>
+        </linearGradient>
+        <linearGradient id="s4cliffR" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#1a1025"/>
+          <stop offset="100%" stop-color="#110c1c"/>
+        </linearGradient>
+        <!-- Cross beam gradient — golden -->
+        <linearGradient id="s4crossH" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8a6a20"/>
+          <stop offset="20%" stop-color="#c9a84c"/>
+          <stop offset="50%" stop-color="#f0d878"/>
+          <stop offset="80%" stop-color="#c9a84c"/>
+          <stop offset="100%" stop-color="#8a6a20"/>
+        </linearGradient>
+        <linearGradient id="s4crossV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e8d196"/>
+          <stop offset="40%" stop-color="#c9a84c"/>
+          <stop offset="100%" stop-color="#7a5c1c"/>
+        </linearGradient>
+        <!-- Radial glow around cross intersection -->
+        <radialGradient id="s4crossGlow" cx="50%" cy="36%" r="30%">
+          <stop offset="0%" stop-color="#f5e6a8" stop-opacity="0.6"/>
+          <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="s4shockwave" cx="50%" cy="36%" r="50%">
+          <stop offset="0%" stop-color="#c9a84c" stop-opacity="0"/>
+          <stop offset="70%" stop-color="#c9a84c" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="s4glow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="s4crossBlur"><feGaussianBlur stdDeviation="14"/></filter>
+      </defs>
+
+      <rect width="800" height="450" fill="url(#s4bg)"/>
+
+      <!-- Left cliff — YOU's side, LOWER -->
+      <path d="M0,210 Q80,198 170,204 Q240,200 285,215 L285,450 L0,450Z" fill="url(#s4cliffL)" style="animation:gFadeIn 0.6s 0.1s both;opacity:0"/>
+      <text x="142" y="160" text-anchor="middle" font-family="Cinzel,serif" font-size="46" letter-spacing="6" fill="rgba(200,180,220,0.75)" opacity="0" style="animation:gFadeUp 0.6s 0.3s both">YOU</text>
+
+      <!-- Right cliff — GOD's side, HIGHER -->
+      <path d="M515,95 Q580,82 685,75 Q750,72 800,78 L800,450 L515,450Z" fill="url(#s4cliffR)" style="animation:gFadeIn 0.6s 0.2s both;opacity:0"/>
+      <text x="658" y="50" text-anchor="middle" font-family="Cinzel,serif" font-size="46" letter-spacing="6" fill="#e8d196" opacity="0" style="animation:gFadeUp 0.6s 0.4s both">GOD</text>
+
+      <!-- Chasm void with fire / Lake of Fire -->
+      <rect x="285" y="0" width="230" height="450" fill="#030208"/>
+      <!-- Fire in chasm pit -->
+      <ellipse cx="400" cy="430" rx="95" ry="45" fill="rgba(255,80,0,0.6)" style="animation:gPulse 0.8s ease-in-out infinite"/>
+      <g style="animation:gPulse 0.6s 0.1s ease-in-out infinite">
+        <path d="M360,450 Q365,405 373,378 Q378,352 374,334 Q388,364 386,393 Q392,358 398,332 Q401,308 401,290 Q406,316 406,348 Q412,368 418,393 Q416,360 423,336 Q430,362 428,415 Q434,385 438,364 Q442,393 442,450Z" fill="rgba(255,90,0,0.8)"/>
+      </g>
+      <g style="animation:gPulse 0.5s 0.2s ease-in-out infinite">
+        <path d="M372,450 Q376,418 382,396 Q387,373 383,358 Q394,380 392,406 Q398,374 402,352 Q405,332 405,318 Q408,336 408,360 Q415,380 420,404 Q418,374 424,352 Q430,376 430,440 Q434,414 438,394 Q441,416 441,450Z" fill="rgba(255,130,0,0.55)"/>
+      </g>
+            <g style="animation:gPulse 0.5s 0.2s ease-in-out infinite">
+        <path d="M372,450 Q376,418 382,396 Q387,373 383,358 Q394,380 392,406 Q398,374 402,352 Q405,332 405,318 Q408,336 408,360 Q415,380 420,404 Q418,374 424,352 Q430,376 430,440 Q434,414 438,394 Q441,416 441,450Z" fill="rgba(255,130,0,0.55)"/>
+      </g>
+
+      <!-- Ember particles in chasm -->
+      <circle cx="393" cy="348" r="2" fill="#ffcc44" style="animation:gRiseStar 1.9s 0.3s ease-out infinite"/>
+      <circle cx="408" cy="320" r="1.8" fill="#ff8800" style="animation:gRiseStar 2.1s 0.7s ease-out infinite"/>
+      <circle cx="420" cy="355" r="1.4" fill="#ffdd66" style="animation:gRiseStar 1.7s 0.5s ease-out infinite"/>
+
+      <!-- Cross glow halo — behind cross, centered at intersection x=400 y=155 -->
+      <ellipse cx="400" cy="155" rx="260" ry="130" fill="url(#s4shockwave)" style="opacity:0;animation:gFadeIn 1s 1.8s both,gPulse 4s 2.8s ease-in-out infinite"/>
+      <ellipse cx="400" cy="155" rx="170" ry="85" fill="url(#s4crossGlow)" filter="url(#s4crossBlur)" style="opacity:0;animation:gFadeIn 0.8s 1.5s both,gPulse 3s 2.3s ease-in-out infinite"/>
+
+      <!-- ═══ THE CROSS ═══
+           A true upright cross planted in the chasm.
+           Vertical beam: x=400, y=18 → y=450 (full height)
+           Horizontal crossbar: y=155, x=230 → x=570
+           The crossbar also extends as a bridge/pathway:
+             left end rests on YOU cliff top (x=285, y≈215)
+             right end rests on GOD cliff top (x=515, y≈95)
+           We draw the bridge path separately beneath the true cross.
+      -->
+
+      <!-- BRIDGE PATH — from YOU cliff edge (285,215) through cross (400,155) up to GOD cliff (515,95) -->
+      <!-- Drawn as a slightly glowing angled plank BENEATH the cross beams -->
+      <line x1="285" y1="215" x2="515" y2="95"
+        stroke="rgba(201,168,76,0.18)" stroke-width="22" stroke-linecap="butt"
+        filter="url(#s4crossBlur)"
+        style="stroke-dasharray:280;stroke-dashoffset:280;animation:gDraw 0.7s 1.3s ease-out forwards"/>
+      <line x1="285" y1="215" x2="515" y2="95"
+        stroke="url(#s4crossH)" stroke-width="11" stroke-linecap="butt"
+        style="stroke-dasharray:280;stroke-dashoffset:280;animation:gDraw 0.7s 1.3s ease-out forwards"/>
+
+      <!-- TRUE CROSS — vertical + proper horizontal crossbar -->
+      <g filter="url(#s4glow)" style="animation:gCrossGlow 3s 2.5s ease-in-out infinite">
+        <!-- Vertical beam glow -->
+        <line x1="400" y1="18" x2="400" y2="450"
+          stroke="rgba(201,168,76,0.3)" stroke-width="30" stroke-linecap="round"
+          filter="url(#s4crossBlur)"/>
+        <!-- Vertical beam main — drawn first, top→bottom -->
+        <line x1="400" y1="18" x2="400" y2="450"
+          stroke="url(#s4crossV)" stroke-width="18" stroke-linecap="round"
+          style="stroke-dasharray:432;stroke-dashoffset:432;animation:gDraw 0.85s 0.8s ease-out forwards"/>
+        <!-- Horizontal crossbar glow — true horizontal at y=155, spanning 230→570 -->
+        <line x1="230" y1="155" x2="570" y2="155"
+          stroke="rgba(201,168,76,0.28)" stroke-width="22" stroke-linecap="round"
+          filter="url(#s4crossBlur)"/>
+        <!-- Horizontal crossbar main — drawn after vertical -->
+        <line x1="230" y1="155" x2="570" y2="155"
+          stroke="url(#s4crossH)" stroke-width="14" stroke-linecap="round"
+          style="stroke-dasharray:340;stroke-dashoffset:340;animation:gDraw 0.65s 1.6s ease-out forwards"/>
+        <!-- Intersection highlight burst -->
+        <circle cx="400" cy="155" r="20" fill="rgba(240,216,120,0.55)"
+          style="opacity:0;animation:gScale 0.5s 2.3s both"/>
+        <circle cx="400" cy="155" r="10" fill="rgba(255,245,200,0.8)"
+          style="opacity:0;animation:gScale 0.4s 2.3s both"/>
+      </g>
+
+      <!-- JESUS label — sits just ABOVE the horizontal crossbar (crossbar y=155, JESUS at y=140) -->
+      <text x="400" y="60" text-anchor="middle" font-family="Cinzel,serif" font-size="18" letter-spacing="8" fill="rgba(240,220,120,0.95)" opacity="0" style="animation:gTextReveal 1s 2.6s both;filter:drop-shadow(0 0 6px rgba(201,168,76,0.7))">JESUS</text>
+      
+    </svg>
+    <button class="verse-btn" style="right:24px;left:auto;transform:none" onclick="toggleVerse(4)">📖 John 14:6</button>
+    <div class="verse-popup" id="vp-4">
+      "I am the way, and the truth, and the life. No one comes to the Father except through me."
+      <cite>— John 14:6</cite>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 5 · ARRIVED — YOU with GOD
+       Same scene as slide 4 (cliffs, fire, cross)
+       but now YOU has crossed — stands on GOD's
+       cliff (right, higher). "YOU" label appears
+       beside "GOD". The bridge is complete.
+  ════════════════════════════════════════════ -->
+  <div class="gp-slide" id="gs-5">
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="s5bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#06041a"/>
+          <stop offset="50%" stop-color="#0a0812"/>
+          <stop offset="100%" stop-color="#03020a"/>
+        </linearGradient>
+        <!-- YOU cliff left — same as s4cliffL -->
+        <linearGradient id="s5cliffL" x1="1" y1="0" x2="0" y2="0">
+          <stop offset="0%" stop-color="#1e3358"/>
+          <stop offset="100%" stop-color="#152440"/>
+        </linearGradient>
+        <!-- GOD cliff right — same as s4cliffR but slightly warmer/lit now YOU has arrived -->
+        <linearGradient id="s5cliffR" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#253545"/>
+          <stop offset="100%" stop-color="#1c2a36"/>
+        </linearGradient>
+        <!-- Cross beam gradients -->
+        <linearGradient id="s5crossH" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8a6a20"/>
+          <stop offset="20%" stop-color="#c9a84c"/>
+          <stop offset="50%" stop-color="#f0d878"/>
+          <stop offset="80%" stop-color="#c9a84c"/>
+          <stop offset="100%" stop-color="#8a6a20"/>
+        </linearGradient>
+        <linearGradient id="s5crossV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e8d196"/>
+          <stop offset="40%" stop-color="#c9a84c"/>
+          <stop offset="100%" stop-color="#7a5c1c"/>
+        </linearGradient>
+        <!-- Arrival glow — warm golden on right cliff -->
+        <radialGradient id="s5arriveGlow" cx="75%" cy="35%" r="45%">
+          <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.45"/>
+          <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="s5crossGlow" cx="50%" cy="34%" r="30%">
+          <stop offset="0%" stop-color="#f5e6a8" stop-opacity="0.5"/>
+          <stop offset="50%" stop-color="#c9a84c" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="s5shockwave" cx="50%" cy="34%" r="50%">
+          <stop offset="0%" stop-color="#c9a84c" stop-opacity="0"/>
+          <stop offset="70%" stop-color="#c9a84c" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="s5glow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="s5crossBlur"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="s5personGlow"><feGaussianBlur stdDeviation="10"/></filter>
+      </defs>
+
+      <rect width="800" height="450" fill="url(#s5bg)"/>
+
+      <!-- Left cliff — YOU's side (now empty, YOU has crossed) -->
+      <path d="M0,210 Q80,198 170,204 Q240,200 285,215 L285,450 L0,450Z" fill="url(#s5cliffL)" style="animation:gFadeIn 0.6s 0.1s both;opacity:0"/>
+
+      <!-- Right cliff — GOD's side, HIGHER — now warmly lit because YOU arrived -->
+      <path d="M515,95 Q580,82 685,75 Q750,72 800,78 L800,450 L515,450Z" fill="url(#s5cliffR)" style="animation:gFadeIn 0.6s 0.2s both;opacity:0"/>
+      <!-- Arrival golden glow on right cliff -->
+      <ellipse cx="660" cy="200" rx="260" ry="220" fill="url(#s5arriveGlow)" style="animation:gPulse 4s 1.5s ease-in-out infinite;opacity:0;animation:gFadeIn 1s 1s both,gPulse 4s 2s ease-in-out infinite"/>
+
+      <!-- Chasm void with fire (same as slide 4) / Lake of Fire -->
+      <rect x="285" y="0" width="230" height="450" fill="#030208"/>
+      <ellipse cx="400" cy="430" rx="95" ry="45" fill="rgba(255,80,0,0.6)" style="animation:gPulse 0.8s ease-in-out infinite"/>
+      <g style="animation:gPulse 0.6s 0.1s ease-in-out infinite">
+        <path d="M360,450 Q365,405 373,378 Q378,352 374,334 Q388,364 386,393 Q392,358 398,332 Q401,308 401,290 Q406,316 406,348 Q412,368 418,393 Q416,360 423,336 Q430,362 428,415 Q434,385 438,364 Q442,393 442,450Z" fill="rgba(255,90,0,0.8)"/>
+      </g>
+      <g style="animation:gPulse 0.5s 0.2s ease-in-out infinite">
+        <path d="M372,450 Q376,418 382,396 Q387,373 383,358 Q394,380 392,406 Q398,374 402,352 Q405,332 405,318 Q408,336 408,360 Q415,380 420,404 Q418,374 424,352 Q430,376 430,440 Q434,414 438,394 Q441,416 441,450Z" fill="rgba(255,130,0,0.55)"/>
+      </g>
+      <circle cx="393" cy="348" r="2" fill="#ffcc44" style="animation:gRiseStar 1.9s 0.3s ease-out infinite"/>
+      <circle cx="408" cy="320" r="1.8" fill="#ff8800" style="animation:gRiseStar 2.1s 0.7s ease-out infinite"/>
+      <circle cx="420" cy="355" r="1.4" fill="#ffdd66" style="animation:gRiseStar 1.7s 0.5s ease-out infinite"/>
+
+      <!-- Cross glow (same position as slide 4) -->
+      <ellipse cx="400" cy="155" rx="260" ry="130" fill="url(#s5shockwave)" style="opacity:0;animation:gFadeIn 1s 0.5s both,gPulse 4s 1.5s ease-in-out infinite"/>
+      <ellipse cx="400" cy="155" rx="170" ry="85" fill="url(#s5crossGlow)" filter="url(#s5crossBlur)" style="opacity:0;animation:gFadeIn 0.8s 0.5s both,gPulse 3s 1.5s ease-in-out infinite"/>
+
+      <!-- Bridge path (same as slide 4, already complete) -->
+      <line x1="285" y1="215" x2="515" y2="95" stroke="rgba(201,168,76,0.18)" stroke-width="22" stroke-linecap="butt" filter="url(#s5crossBlur)"/>
+      <line x1="285" y1="215" x2="515" y2="95" stroke="url(#s5crossH)" stroke-width="11" stroke-linecap="butt"/>
+
+      <!-- TRUE CROSS — same upright cross, already drawn (no dash animation, it's complete) -->
+      <g filter="url(#s5glow)" style="animation:gCrossGlow 3s 1s ease-in-out infinite">
+        <!-- Vertical beam glow -->
+        <line x1="400" y1="18" x2="400" y2="450" stroke="rgba(201,168,76,0.3)" stroke-width="30" stroke-linecap="round" filter="url(#s5crossBlur)"/>
+        <!-- Vertical beam main — already fully drawn -->
+        <line x1="400" y1="18" x2="400" y2="450" stroke="url(#s5crossV)" stroke-width="18" stroke-linecap="round" opacity="0" style="animation:gFadeIn 0.4s 0.3s both"/>
+        <!-- Horizontal crossbar glow -->
+        <line x1="230" y1="155" x2="570" y2="155" stroke="rgba(201,168,76,0.28)" stroke-width="22" stroke-linecap="round" filter="url(#s5crossBlur)"/>
+        <!-- Horizontal crossbar main -->
+        <line x1="230" y1="155" x2="570" y2="155" stroke="url(#s5crossH)" stroke-width="14" stroke-linecap="round" opacity="0" style="animation:gFadeIn 0.4s 0.3s both"/>
+        <!-- Intersection burst -->
+        <circle cx="400" cy="155" r="20" fill="rgba(240,216,120,0.55)" opacity="0" style="animation:gFadeIn 0.4s 0.5s both"/>
+        <circle cx="400" cy="155" r="10" fill="rgba(255,245,200,0.8)" opacity="0" style="animation:gFadeIn 0.4s 0.5s both"/>
+      </g>
+
+      <!-- GOD label — right cliff top -->
+      <text x="658" y="50" text-anchor="middle" font-family="Cinzel,serif" font-size="46" letter-spacing="6" fill="#e8d196" opacity="0" style="animation:gFadeUp 0.6s 0.4s both">GOD</text>
+
+      <!-- YOU label — NOW on GOD's side, beside the figure, appearing with a glow -->
+      <text x="658" y="150" text-anchor="middle" font-family="Cinzel,serif" font-size="32" letter-spacing="5" fill="rgba(232,209,150,0.95)" opacity="0"
+        style="animation:gScale 0.7s 1.8s cubic-bezier(0.34,1.56,0.64,1) both;filter:drop-shadow(0 0 12px rgba(201,168,76,0.8))">YOU</text>
+
+    </svg>
+    <button class="verse-btn" style="left:50%;transform:translateX(-50%)" onclick="toggleVerse(5)">📖 John 1:12</button>
+    <div class="verse-popup" id="vp-5">
+      "Yet to all who did receive him, to those who believed in his name, he gave the right to become children of God."
+      <cite>— John 1:12</cite>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 6 · INVITATION PRAYER
+       Full-bleed cinematic prayer slide
+  ════════════════════════════════════════════ -->
+  <div class="gp-slide" id="gs-6">
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="s7bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#04060e"/>
+          <stop offset="40%" stop-color="#080e06"/>
+          <stop offset="80%" stop-color="#0e0604"/>
+          <stop offset="100%" stop-color="#060314"/>
+        </linearGradient>
+        <radialGradient id="s7glow" cx="50%" cy="40%" r="45%">
+          <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="s7crossV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e8d196"/>
+          <stop offset="100%" stop-color="#9a7830"/>
+        </linearGradient>
+        <linearGradient id="s7crossH" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#9a7830"/>
+          <stop offset="50%" stop-color="#e8d196"/>
+          <stop offset="100%" stop-color="#9a7830"/>
+        </linearGradient>
+        <filter id="s7crossGlow"><feGaussianBlur stdDeviation="8"/></filter>
+      </defs>
+      <rect width="800" height="450" fill="url(#s7bg)"/>
+      <ellipse cx="400" cy="185" rx="260" ry="170" fill="url(#s7glow)" style="animation:gPulse 5s ease-in-out infinite"/>
+      <!-- Stars background -->
+      <g opacity="0.5">
+        <circle cx="80" cy="40" r="1" fill="white"/><circle cx="160" cy="25" r="1.3" fill="white"/>
+        <circle cx="280" cy="55" r="0.9" fill="white"/><circle cx="500" cy="30" r="1.1" fill="white"/>
+        <circle cx="640" cy="48" r="1" fill="white"/><circle cx="720" cy="20" r="1.4" fill="white"/>
+        <circle cx="50" cy="80" r="0.8" fill="white"/><circle cx="750" cy="75" r="1" fill="white"/>
+      </g>
+    </svg>
+    <div style="position:relative;z-index:2;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:20px 5% 70px;gap:clamp(20px,4vw,60px)">
+      <!-- Left: Cross illustration -->
+      <div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+        <svg width="70" height="100" viewBox="0 0 70 100" style="filter:drop-shadow(0 0 18px rgba(201,168,76,0.7));animation:gCrossGlow 3s ease-in-out infinite,gFadeIn 0.8s 0.2s both;opacity:0">
+          <defs>
+            <linearGradient id="s7cv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f0d878"/><stop offset="100%" stop-color="#9a7830"/>
+            </linearGradient>
+            <linearGradient id="s7ch" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#9a7830"/><stop offset="50%" stop-color="#f0d878"/><stop offset="100%" stop-color="#9a7830"/>
+            </linearGradient>
+          </defs>
+          <!-- Vertical: full height. Horizontal: at y=32 = ~32% from top -->
+          <rect x="27" y="4" width="16" height="92" rx="8" fill="url(#s7cv)"/>
+          <rect x="4" y="24" width="62" height="14" rx="7" fill="url(#s7ch)"/>
+        </svg>
+      </div>
+      <!-- Right: Prayer text -->
+      <div style="flex:1;max-width:500px;">
+        <p style="font-family:'Cinzel',serif;font-size:clamp(10px,1.5vw,13px);letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,0.65);margin-bottom:10px;animation:gFadeUp 0.7s 0.4s both;opacity:0">An Invitation</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,32px);color:white;line-height:1.25;margin-bottom:16px;animation:gFadeUp 0.7s 0.6s both;opacity:0">Would you like to <em style="color:#c9a84c;font-style:italic">receive Jesus</em> today?</h2>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.28);border-radius:14px;padding:16px 20px;animation:gFadeUp 0.8s 0.9s both;opacity:0">
+          <p style="font-family:'Playfair Display',serif;font-size:clamp(13px,1.8vw,16px);color:rgba(255,255,255,0.88);line-height:1.8;font-style:italic;text-align:center">
+            "Lord Jesus, I know I am a sinner.<br>
+            Thank you for dying for me.<br>
+            I open the door of my heart.<br>
+            Come in. Be my Lord and Savior.<br>
+            Make me new."
+          </p>
+        </div>
+        <p style="font-family:'DM Sans',sans-serif;font-size:clamp(11px,1.4vw,13px);color:rgba(255,255,255,0.3);margin-top:12px;text-align:center;animation:gFadeUp 0.6s 1.3s both;opacity:0">Romans 10:9–10</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDE ARROWS -->
+  <button class="gp-arrow" id="gp-prev" onclick="gpNav(-1)" disabled><span class="chevron"></span></button>
+  <button class="gp-arrow" id="gp-next" onclick="gpNav(1)"><span class="chevron"></span></button>
+</div>
+
+<!-- ══ BOTTOM NAV ══ -->
+<nav class="main-nav">
+  <div class="main-nav-inner">
+    <button class="main-tab active" data-guide="home" onclick="showScreen('home')">
+      <span class="tab-icon">🏠</span><span class="tab-label">Home</span>
+    </button>
+    <button class="main-tab" data-guide="genz" onclick="showScreen('genz')">
+      <span class="tab-icon">✨</span><span class="tab-label">Gen Z</span>
+    </button>
+    <button class="main-tab" data-guide="mill" onclick="showScreen('mill')">
+      <span class="tab-icon">🌿</span><span class="tab-label">Millennials</span>
+    </button>
+    <button class="main-tab" data-guide="genx" onclick="showScreen('genx')">
+      <span class="tab-icon">🔥</span><span class="tab-label">Gen X</span>
+    </button>
+    <button class="main-tab" data-guide="real" onclick="showScreen('real')">
+      <span class="tab-icon">🌍</span><span class="tab-label">All Gen</span>
+    </button>
+  </div>
+</nav>
+
+<script>
+/* ══ SCREEN NAVIGATION ══ */
+let previousScreen = 'home';
+let currentGuide = null;
+
+function showScreen(id, skipNav) {
+  const prev = document.querySelector('.screen.active');
+  if (prev) previousScreen = prev.id.replace('screen-', '');
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  window.scrollTo({ top: 0 });
+  const navBar = document.getElementById('session-nav-bar');
+  if (navBar) navBar.classList.toggle('visible', id === 'content');
+  if (!skipNav) {
+    document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+    const tab = document.querySelector(`.main-tab[data-guide="${id}"]`);
+    if (tab) tab.classList.add('active');
+    if (id !== 'home' && id !== 'content') currentGuide = id;
+  }
+}
+
+function goBack() { showScreen(currentGuide || 'home'); }
+
+/* ══ GOSPEL PLAYER ══ */
+let gpCurrent = 1;
+const GP_TOTAL = 6;
+let openVerseId = null;
+
+function openGospel() {
+  const player = document.getElementById('gospel-player');
+  player.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.querySelector('.main-nav').style.display = 'none';
+  gpCurrent = 1;
+  gpShow(1);
+  // Flash arrows on open
+  setTimeout(flashArrows, 600);
+  // Tap anywhere on slide flashes arrows
+  player.addEventListener('click', function onTap(e) {
+    // Don't trigger on buttons/verse btns
+    if (!e.target.closest('.gp-arrow') && !e.target.closest('.verse-btn') && !e.target.closest('.verse-popup') && !e.target.closest('.gp-close')) {
+      flashArrows();
+    }
+  });
+  // Try native lock first (works on Android Chrome)
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(() => {});
+  }
+  // CSS rotation handles what the API cannot (iOS, etc.)
+}
+
+function closeGospel() {
+  const player = document.getElementById('gospel-player');
+  player.classList.remove('open');
+  document.body.style.overflow = '';
+  document.querySelector('.main-nav').style.display = '';
+  document.querySelectorAll('.verse-popup').forEach(v => v.classList.remove('show'));
+  openVerseId = null;
+  if (screen.orientation && screen.orientation.unlock) {
+    screen.orientation.unlock();
+  }
+}
+
+function gpShow(n) {
+  // Hide current verse popup
+  document.querySelectorAll('.verse-popup').forEach(v => v.classList.remove('show'));
+  openVerseId = null;
+  // Animate out current
+  const prev = document.querySelector('.gp-slide.active');
+  if (prev) prev.classList.remove('active');
+  gpCurrent = n;
+  const next = document.getElementById('gs-' + n);
+  if (next) {
+    next.classList.add('active');
+  }
+  // Nav state
+  const prevBtn = document.getElementById('gp-prev');
+  const nextBtn = document.getElementById('gp-next');
+  prevBtn.disabled = gpCurrent <= 1;
+  nextBtn.disabled = gpCurrent >= GP_TOTAL;
+  // Flash arrows briefly to show they exist
+  flashArrows();
+}
+
+let arrowFadeTimer = null;
+function flashArrows() {
+  const prevBtn = document.getElementById('gp-prev');
+  const nextBtn = document.getElementById('gp-next');
+  // Show whichever arrows are active
+  if (!prevBtn.disabled) prevBtn.classList.add('visible');
+  if (!nextBtn.disabled) nextBtn.classList.add('visible');
+  // Auto-hide after 1.8s
+  clearTimeout(arrowFadeTimer);
+  arrowFadeTimer = setTimeout(() => {
+    prevBtn.classList.remove('visible');
+    nextBtn.classList.remove('visible');
+  }, 1800);
+}
+
+function gpNav(dir) {
+  const next = gpCurrent + dir;
+  if (next >= 1 && next <= GP_TOTAL) gpShow(next);
+}
+
+function toggleVerse(id) {
+  if (openVerseId === id) {
+    document.getElementById('vp-' + id).classList.remove('show');
+    openVerseId = null;
+  } else {
+    if (openVerseId) document.getElementById('vp-' + openVerseId)?.classList.remove('show');
+    document.getElementById('vp-' + id)?.classList.add('show');
+    openVerseId = id;
+  }
+}
+
+// Swipe support
+let touchStartX = 0, touchStartY = 0;
+document.getElementById('gospel-player').addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+document.getElementById('gospel-player').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+    gpNav(dx < 0 ? 1 : -1);
+  }
+}, { passive: true });
+
+/* ══ SESSION DATA ══ */
+const genzSessions = [
+  {title:'"Who Is This Guy?"',ref:'Mark 1:14–28',
+   passage:`<div class="passage-block"><div class="passage-header">Mark 1:14–28 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">14</span>Now after John had been taken into custody, Jesus came into Galilee, preaching the gospel of God,</span><span class="vline"><span class="vnum">15</span><mark>and saying, "The time is fulfilled, and the kingdom of God is at hand; repent and believe in the gospel."</mark></span><span class="vline"><span class="vnum">16</span>As He was going along by the Sea of Galilee, He saw Simon and Andrew, the brother of Simon, casting a net in the sea; for they were fishermen.</span><span class="vline"><span class="vnum">17</span><mark>And Jesus said to them, "Follow Me, and I will make you become fishers of men."</mark></span><span class="vline"><span class="vnum">18</span><mark>Immediately they left their nets and followed Him.</mark></span><span class="vline"><span class="vnum">22</span><mark>They were amazed at His teaching; for He was teaching them as one having authority, and not as the scribes.</mark></span><span class="vline"><span class="vnum">27</span><mark>They were all amazed, so that they debated among themselves, saying, "What is this? A new teaching with authority! He commands even the unclean spirits, and they obey Him."</mark></span></div></div>`,
+   connect:'What\'s one thing people always get wrong about you?',discover:'Read Mark 1:14–28 together.',questions:['What surprises you about how Jesus called his first disciples?','Verse 22: "He taught as one who had authority." Who do you actually trust in life — and why?','What do you think Simon and Andrew gave up when they left their nets?'],apply:'If Jesus said to you today, \'Follow me\' — what would you be leaving behind?',pray:'Pray for one thing they shared in the Connect time.',tip:'Keep it light and relational. Don\'t rush to conclusions. Your goal is curiosity, not conviction. Let the text do the work.'},
+
+  {title:'"Why Is Everyone Rejected?"',ref:'Mark 3:20–35',
+   passage:`<div class="passage-block"><div class="passage-header">Mark 3:20–35 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">21</span><mark>When His own people heard of this, they went out to take custody of Him; for they were saying, "He has lost His senses."</mark></span><span class="vline"><span class="vnum">34</span>Looking about at those who were sitting around Him, He said, <mark>"Behold My mother and My brothers! For whoever does the will of God, this is My brother and sister and mother."</mark></span></div></div>`,
+   connect:'Tell me about a time you felt misunderstood by your family or people close to you.',discover:'Read Mark 3:20–35.',questions:['Even Jesus\' family thought he was \'out of his mind.\' Does that change how you see your own family tension about faith?','Who does Jesus call \'my brother, sister, mother\'? What does that mean to you personally?'],apply:'Is there anyone in your life you can\'t fully be yourself around? What would a community where you could look like?',pray:'Pray for the relationship they mentioned.',tip:'Family tension around faith is very common for Gen Z. If they open up about painful family dynamics, listen fully before responding.'},
+
+  {title:'"The Feeding and the Storm"',ref:'Mark 4:35–41; 6:30–44',
+   passage:`<div class="passage-block"><div class="passage-header">Mark 4:35–41 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">37</span><mark>And there arose a fierce gale of wind, and the waves were breaking over the boat so much that the boat was already filling up.</mark></span><span class="vline"><span class="vnum">38</span>Jesus Himself was in the stern, asleep on the cushion; and they woke Him and said to Him, "Teacher, do You not care that we are perishing?"</span><span class="vline"><span class="vnum">40</span><mark>And He said to them, "Why are you afraid? Do you still have no faith?"</mark></span><span class="vline"><span class="vnum">41</span>They became very much afraid and said to one another, "Who then is this, that even the wind and the sea obey Him?"</span></div></div>`,
+   connect:'When was the last time you felt genuinely overwhelmed — like you couldn\'t handle something?',discover:'Read Mark 4:35–41.',questions:['The disciples were experienced fishermen — and still terrified. When has your own skill or preparation not been enough?','Jesus asked \'Why are you afraid? Do you still have no faith?\' Is that harsh or kind? Why?'],apply:'What storm in your life right now do you need to bring to Jesus instead of trying to manage alone?',pray:'Pray for the specific storm they named.',tip:'After this session, share your own story of a time God came through unexpectedly.'},
+
+  {title:'"The Outsiders"',ref:'Mark 7:24–37',
+   passage:`<div class="passage-block"><div class="passage-header">Mark 7:24–30 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">26</span><mark>Now the woman was a Gentile, of the Syrophoenician race. And she kept asking Him to cast the demon out of her daughter.</mark></span><span class="vline"><span class="vnum">28</span><mark>But she answered and said to Him, "Yes, Lord, but even the dogs under the table feed on the children's crumbs."</mark></span><span class="vline"><span class="vnum">29</span><mark>And He said to her, "Because of this answer go; the demon has gone out of your daughter."</mark></span></div></div>`,
+   connect:'Have you ever felt like an outsider — in a friend group, school, family, or place of worship?',discover:'Read Mark 7:24–30.',questions:['What is bold about this woman\'s request? What does she understand about Jesus that others miss?','Why do you think Jesus heals her daughter? What does this tell you about who Jesus is for?'],apply:'Do you ever feel like God is not for people like you? Be honest. What would it mean to believe that He is?',pray:'Pray for the feeling of belonging they named.',tip:'Many Gen Z students feel like outsiders. Let them sit in the identification before moving to application.'},
+
+  {title:'"The Cost"',ref:'Mark 8:27–38',
+   passage:`<div class="passage-block"><div class="passage-header">Mark 8:34–38 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">34</span><mark>"If anyone wishes to come after Me, he must deny himself, and take up his cross and follow Me."</mark></span><span class="vline"><span class="vnum">35</span><mark>"For whoever wishes to save his life will lose it, but whoever loses his life for My sake and the gospel's will save it."</mark></span><span class="vline"><span class="vnum">36</span><mark>"For what does it profit a man to gain the whole world, and forfeit his soul?"</mark></span></div></div>`,
+   connect:'What\'s something you\'ve sacrificed for something you really believed in?',discover:'Read Mark 8:34–38.',questions:['What does \'deny yourself and take up your cross\' mean to you in 2026?','Jesus says, "What good is it to gain the whole world and lose yourself?" Where do you see people — or yourself — doing that?'],apply:'Is there an area where you know God is asking you to surrender something but you\'ve been avoiding it?',pray:'Pray for courage to take the step they named.',tip:'Do not soften the cost of discipleship — but also do not weaponize it. Share your own cross.'},
+
+  {title:'"It Is Finished — Now What?"',ref:'Mark 16:1–8',
+   passage:`<div class="passage-block"><div class="passage-header">Mark 16:1–8 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">6</span><mark>"Do not be amazed; you are looking for Jesus the Nazarene, who has been crucified. He has risen; He is not here."</mark></span><span class="vline"><span class="vnum">8</span><mark>They went out and fled from the tomb, for trembling and astonishment had gripped them.</mark></span></div></div>`,
+   connect:'If you knew something life-changing, what would stop you from telling people about it?',discover:'Read Mark 16:1–8.',questions:['The women ran from the tomb \'trembling and bewildered.\' Why do you think resurrection was confusing, not just exciting?','What do you make of this Jesus now — after reading through Mark together?'],apply:'What is one thing from this study that has genuinely changed how you think, feel, or want to live?',pray:'Celebrate! Pray for the next step.',tip:'This is a milestone session — celebrate openly! Ask: "What do you want to do with what you\'ve discovered?" Let them lead.'},
+];
+
+const millSessions = [
+  {title:'"I\'m Drowning"',ref:'Psalm 18:1–19',passage:`<div class="passage-block"><div class="passage-header">Psalm 18:1–6, 16–19 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">1</span><mark>"I love You, O Lord, my strength."</mark></span><span class="vline"><span class="vnum">6</span><mark>In my distress I called upon the Lord and cried to my God for help; He heard my voice.</mark></span><span class="vline"><span class="vnum">19</span><mark>He brought me forth also into a broad place; He rescued me, because He delighted in me.</mark></span></div></div>`,connect:'What\'s one area of life right now where you feel most stretched or tired?',discover:'Read Psalm 18:1–6 and 16–19.',questions:['David writes from a place of genuine crisis. When have you been most honest with God?','He says \'He rescued me because He delighted in me\' (v.19). Not because of performance. How does that land for you?','What would it look like to believe God actually delights in you — right now?'],apply:'Write or say out loud one honest thing you\'d say to God today if you believed He was actually listening.',pray:'Pray that prayer together.',tip:'The phrase "He delighted in me" can be genuinely shocking. Give it space. Ask: "What does it feel like to hear that?"'},
+  {title:'"The Comparison Trap"',ref:'Psalm 73',passage:`<div class="passage-block"><div class="passage-header">Psalm 73:1–17 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">3</span><mark>For I was envious of the arrogant as I saw the prosperity of the wicked.</mark></span><span class="vline"><span class="vnum">17</span><mark>Until I came into the sanctuary of God; then I perceived their end.</mark></span></div></div>`,connect:'Social media, work, your neighbor\'s new car — where do you feel the comparison trap most?',discover:'Read Psalm 73:1–17.',questions:['Asaph almost loses his faith watching \'the wicked prosper.\' Where do you feel like the faithful are losing?','Verse 17: Everything changed \'until I entered the sanctuary of God.\' What changes your perspective?'],apply:'What is one comparison you need to lay down this week?',pray:'Pray specifically about the comparison they named.',tip:'Validate that comparison and envy are real, not shameful.'},
+  {title:'"The Wisdom of Small Decisions"',ref:'Proverbs 4:20–27',passage:`<div class="passage-block"><div class="passage-header">Proverbs 4:20–27 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">23</span><mark>Watch over your heart with all diligence, for from it flow the springs of life.</mark></span><span class="vline"><span class="vnum">26</span><mark>Watch the path of your feet and all your ways will be established.</mark></span></div></div>`,connect:'What\'s one small decision in your past that changed the direction of your life?',discover:'Read Proverbs 4:20–27.',questions:['\'Guard your heart, for everything you do flows from it.\' What are you feeding your heart daily?','What does a level path look like in your current life stage?'],apply:'Name one habit, relationship, or input into your life that you know is pulling you in the wrong direction.',pray:'Pray about the specific thing they named.',tip:'Let them lead the depth. Your role is to ask, not tell.'},
+  {title:'"When Work or Marriage Feels Broken"',ref:'Psalm 62; Colossians 3:23–24',passage:`<div class="passage-block"><div class="passage-header">Psalm 62:1, 5 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">1</span><mark>My soul waits in silence for God only; from Him is my salvation.</mark></span></div></div>`,connect:'Where in your work or closest relationships do you feel most unappreciated or invisible?',discover:'Read Psalm 62:1–8 and Colossians 3:23–24.',questions:['\'My soul finds rest in God alone.\' What\'s the difference between looking to people for rest vs. God?','\'Work as for the Lord.\' How does that change the meaning of ordinary, unrewarded work?'],apply:'Which relationship or role do you most need to re-frame as an act of worship this week?',pray:'Pray for their specific work burden and relationships.',tip:'Unmet expectations in marriage and work are deeply sensitive. If they begin to open up, listen carefully and do not offer quick solutions.'},
+  {title:'"Raising Arrows"',ref:'Psalm 127–128',passage:`<div class="passage-block"><div class="passage-header">Psalm 127:1–3 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">1</span><mark>Unless the Lord builds the house, they labor in vain who build it.</mark></span><span class="vline"><span class="vnum">3</span><mark>Behold, children are a gift of the Lord, the fruit of the womb is a reward.</mark></span></div></div>`,connect:'What\'s one fear you have as a parent — or what kind of person do you want to be remembered as?',discover:'Read Psalm 127:1–5 and 128:1–4.',questions:['\'Unless the Lord builds the house, the builders labor in vain.\' What does it mean to build a family with God at the center?','What does a \'blessed\' home look like to you?'],apply:'What is one thing you want to start doing differently in your home starting this week?',pray:'Pray for their family by name — each person.',tip:'Pray for each child by name at the end — this is often deeply moving.'},
+  {title:'"The Good Life"',ref:'Psalm 1; John 15:1–11',passage:`<div class="passage-block"><div class="passage-header">Psalm 1:1–3 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">2</span><mark>His delight is in the law of the Lord, and in His law he meditates day and night.</mark></span><span class="vline"><span class="vnum">3</span><mark>He will be like a tree firmly planted by streams of water, which yields its fruit in its season.</mark></span></div></div>`,connect:'How do you define a successful life? Has that definition changed in the last 5 years?',discover:'Read Psalm 1 and John 15:4–5.',questions:['Psalm 1 describes the person who meditates on God\'s Word as \'like a tree planted by streams.\' What does being rooted mean in a fast-moving world?','Jesus says \'apart from me you can do nothing.\' Is that discouraging or freeing?'],apply:'What is one discipline — daily or weekly — that would help you stay connected to God?',pray:'Let your friend pray for you too. Mutual prayer is a sign of real relationship.',tip:'This is your final session. Share what you\'ve seen grow in them. Plant the seed of multiplication.'},
+];
+
+const genxSessions = [
+  {title:'"What Have I Actually Built?"',ref:'Ecclesiastes 1:1–11; 2:1–11',passage:`<div class="passage-block"><div class="passage-header">Ecclesiastes 2:10–11 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">11</span><mark>Thus I considered all my activities which my hands had done and the labor which I had exerted, and behold all was vanity and striving after wind.</mark></span></div></div>`,connect:'Looking back at the last 20 years — what are you most proud of? What do you wish had been different?',discover:'Read Ecclesiastes 1:2–4 and 2:10–11.',questions:['Qohelet built everything and called it "meaningless." Does that resonate? Why or why not?','What do you think gives a life real meaning — not just success or achievement?'],apply:'If you had 10 more years, what would you want to invest them in — and why?',pray:'Sit with the answer they give. Don\'t rush past it.',tip:'This session is slow — do not rush it. Gen X will fill the silence with their real thoughts — often gold.'},
+  {title:'"When Faith Gets Tested"',ref:'Job 1:1–12; 13:15',passage:`<div class="passage-block"><div class="passage-header">Job 13:15 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">15</span><mark>"Though He slay me, I will hope in Him."</mark></span></div></div>`,connect:'Has there been a season in your life where God felt silent, absent, or unfair?',discover:'Read Job 1:1–5 and 2:9–10.',questions:['Job loses everything and still says "Shall we accept good from God and not trouble?" Where does that kind of faith come from?','Read Job 13:15 — "Though He slay me, yet will I trust Him." Is that despair, defiance, or faith?'],apply:'Is there a place in your life where you\'ve been holding back from God because of something painful?',pray:'Pray for the painful place they named — slowly, specifically.',tip:'Your willingness to stay present in the pain is the ministry.'},
+  {title:'"The Weight of Regret"',ref:'Psalm 51; Romans 8:1',passage:`<div class="passage-block"><div class="passage-header">Psalm 51:10; Romans 8:1 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">10</span><mark>Create in me a clean heart, O God, and renew a steadfast spirit within me.</mark></span><span class="vline"><span class="vnum">—</span><mark>Therefore there is now no condemnation for those who are in Christ Jesus. (Rom 8:1)</mark></span></div></div>`,connect:'Is there something in your life — a choice, a relationship — that you still carry guilt or regret about?',discover:'Read Psalm 51:1–13.',questions:['David wrote this after one of his worst moral failures. What strikes you about the honesty of his prayer?','He asks God to \'create in me a clean heart\' — not just forgive the action, but change the person. What\'s the difference?','Read Romans 8:1. What does that verse do to the weight you carry?'],apply:'Is there something specific you need to receive forgiveness for — from God, or perhaps from yourself?',pray:'Be present. Do not rush. Allow silence.',tip:'Be present. Tissues may be needed. Do not rush.'},
+  {title:'"Legacy: What Will Remain?"',ref:'Psalm 71:17–18; 2 Timothy 1:5',passage:`<div class="passage-block"><div class="passage-header">Psalm 71:18 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">18</span><mark>Even when I am old and gray, O God, do not forsake me, until I declare Your strength to this generation.</mark></span></div></div>`,connect:'What\'s one thing you learned from your parents or grandparents — positive or negative — that shaped who you are?',discover:'Read Psalm 71:17–18 and 2 Timothy 1:5.',questions:['What do you hope the next generation takes from watching your life?','Paul notes Timothy\'s faith first lived in his grandmother Lois. Who poured faith into you?'],apply:'Who in the next generation is watching your life? What story of faith are you passing on to them right now?',pray:'Pray for the specific legacy moment they named.',tip:'Hold both grief about parents and hope about children gently.'},
+  {title:'"Anger, Disappointment, and God"',ref:'Psalm 88; Lamentations 3:19–24',passage:`<div class="passage-block"><div class="passage-header">Lamentations 3:21–23 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">21</span><mark>This I recall to my mind, therefore I have hope.</mark></span><span class="vline"><span class="vnum">22–23</span><mark>The Lord's lovingkindnesses never cease... They are new every morning; great is Your faithfulness.</mark></span></div></div>`,connect:'What\'s something in the world or your personal life that makes you genuinely angry or sad right now?',discover:'Read Psalm 88 — the only Psalm that ends without resolution.',questions:['This psalm ends in darkness. No "but God." Just lament. Does it comfort or disturb you that this is in the Bible?','How does the writer of Lamentations move from despair to "great is Your faithfulness"?'],apply:'Where are you right now — in the darkness of Psalm 88 or beginning to see the dawn of Lamentations 3?',pray:'Stay with wherever they are. Do not rush to resolution.',tip:'Not every session needs a tidy resolution. Naming the darkness is itself a form of hope.'},
+  {title:'"Finishing Well"',ref:'2 Timothy 4:6–8; Hebrews 12:1–3',passage:`<div class="passage-block"><div class="passage-header">2 Timothy 4:7 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">7</span><mark>"I have fought the good fight, I have finished the course, I have kept the faith."</mark></span></div></div>`,connect:'When you imagine the end of your life — what would \'finished well\' look like?',discover:'Read 2 Timothy 4:6–8 and Hebrews 12:1–3.',questions:['"I have fought the good fight, I have finished the race, I have kept the faith." Which of these three do you most want to say?','We run with "a great cloud of witnesses" — cheering. Who do you picture in that crowd for you?'],apply:'What is one thing you want to change or strengthen in the next season to make sure you finish well?',pray:'Pray for your friend\'s legacy — name it. Invite them to pray — even one sentence.',tip:'Name what you\'ve seen in them. Speak their legacy out loud before they do. Then ask them to do the same for you.'},
+];
+
+const rwTopics = [
+  {id:'mental',num:1,title:'Calm in the Storm',sub:'Mental Health, Anxiety & Inner Peace',gen:'All — especially Gen Z',passage:`<div class="passage-block"><div class="passage-header">Philippians 4:6–7 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">6</span><mark>Be anxious for nothing, but in everything by prayer and supplication with thanksgiving let your requests be made known to God.</mark></span><span class="vline"><span class="vnum">7</span><mark>And the peace of God, which surpasses all comprehension, will guard your hearts and your minds in Christ Jesus.</mark></span></div></div>`,scripture:'"Cast all your anxiety on him because he cares for you."',ref:'1 Peter 5:7',connect:'On a scale of 1–10, how anxious do you feel in a typical week? What\'s the biggest source of that?',discover:'Read Matthew 6:25–34 and Philippians 4:6–7.',questions:['\'Do not worry about your life\' — does that feel realistic or dismissive to you?','What\'s hard about the \'thanksgiving\' part of Philippians 4:6 when you\'re anxious?','\'The peace that transcends understanding\' — have you ever experienced a peace that made no logical sense?','What is the difference between healthy planning and unhealthy anxiety?'],apply:'Name one worry you will consciously give to God in prayer every morning this week.',pray:'Pray specifically for the anxiety they named. Ask God for the \'peace that transcends understanding\' for them by name.',note:'Mental health is deeply real and often carries shame. Affirm that anxiety is not a lack of faith — even Jesus said \'my soul is overwhelmed with sorrow\' (Mark 14:34).'},
+  {id:'social',num:2,title:'More Than a Highlight Reel',sub:'Social Media, Identity & the Comparison Trap',gen:'Gen Z & Millennials',passage:`<div class="passage-block"><div class="passage-header">Psalm 139:13–14 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">13</span><mark>For You formed my inward parts; You wove me in my mother's womb.</mark></span><span class="vline"><span class="vnum">14</span><mark>I will give thanks to You, for I am fearfully and wonderfully made.</mark></span></div></div>`,scripture:'"For we are God\'s handiwork, created in Christ Jesus to do good works."',ref:'Ephesians 2:10',connect:'Be honest: When you scroll social media, do you usually feel better or worse about yourself?',discover:'Read Psalm 139:13–16 and Galatians 1:10.',questions:['\'You are fearfully and wonderfully made.\' Does that feel true or like a church cliche?','Paul asks: \'Am I now trying to win the approval of human beings or of God?\' Where are you seeking approval most?','What is the difference between sharing your life online and performing your life online?','If your social media accounts were gone — what would you feel?'],apply:'One-week challenge: Set a 30-minute daily screen time limit on your most-used social media app.',pray:'Pray for the person\'s true identity — who God says they are.',note:'Avoid moralistic lecturing. The goal is self-awareness, not guilt.'},
+  {id:'tech',num:3,title:'Human in the Age of AI',sub:'Artificial Intelligence, Technology & What Makes Us Uniquely Human',gen:'All generations',passage:`<div class="passage-block"><div class="passage-header">Genesis 1:27 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">27</span><mark>God created man in His own image, in the image of God He created him; male and female He created them.</mark></span></div></div>`,scripture:'"So God created mankind in his own image."',ref:'Genesis 1:27',connect:'Have you used an AI tool recently? What did you think? Does it excite or unsettle you?',discover:'Read Genesis 1:27–28 and Psalm 8:3–9.',questions:['The Bible says humans are made in the \'image of God.\' What does that mean — and could AI ever have that?','If AI can write, create art, diagnose illness — what do you think is uniquely and irreducibly human?','How do you think Christians should engage with AI tools?','What fears do you have about AI — in your career, relationships, or sense of purpose?'],apply:'Use one AI tool intentionally for something helpful this week — then reflect: what did it do well, and what did it clearly lack?',pray:'Pray for wisdom in how to use technology as a tool for God\'s purposes rather than a substitute for human connection.',note:'Great bridge to the gospel: only in God do we find the ultimate answer to what makes human life meaningful.'},
+  {id:'money',num:4,title:'Rich or Free?',sub:'Money, Debt, the OFW Dream & True Contentment',gen:'Millennials & Gen X',passage:`<div class="passage-block"><div class="passage-header">1 Timothy 6:6, 10 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">6</span><mark>Godliness actually is a means of great gain when accompanied by contentment.</mark></span><span class="vline"><span class="vnum">10</span><mark>For the love of money is a root of all sorts of evil.</mark></span></div></div>`,scripture:'"Godliness with contentment is great gain."',ref:'1 Timothy 6:6',connect:'What does financial success look like in your family\'s eyes? Is that picture the same as yours?',discover:'Read 1 Timothy 6:6–10 and Luke 12:15–21.',questions:['\'The love of money is the root of all kinds of evil.\' What does it mean to love money?','In the Parable of the Rich Fool, the man built bigger barns — what was actually wrong with that?','Many Filipinos sacrifice family closeness for OFW income. What is the real cost of that?','What does contentment look like in a Philippine context where poverty is real?'],apply:'Write a one-page \'theology of money\' — what does God say about your relationship with money?',pray:'Pray for your friend\'s financial anxieties specifically.',note:'Money is one of the most personal and shame-filled topics. Begin with your own story.'},
+  {id:'sex',num:5,title:'Love, Sex & the Lonely Screen',sub:'Dating Apps, Pornography, Hookup Culture & God\'s Design for Intimacy',gen:'Gen Z & Millennials',passage:`<div class="passage-block"><div class="passage-header">1 Corinthians 6:18–20 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">19</span><mark>Your body is a temple of the Holy Spirit who is in you, whom you have from God.</mark></span><span class="vline"><span class="vnum">20</span><mark>For you have been bought with a price: therefore glorify God in your body.</mark></span></div></div>`,scripture:'"Flee from sexual immorality... you were bought at a price."',ref:'1 Corinthians 6:18–20',connect:'Without judgment: What do you think is the biggest lie young people believe about relationships and sex today?',discover:'Read 1 Corinthians 6:18–20 and Song of Songs 2:7.',questions:['The Bible treats the body as sacred — \'a temple of the Holy Spirit.\' How does that vision differ from how culture treats it?','What do you think drives the rise of pornography and hookup culture — beyond just \'sin\'?','\'Do not awaken love before its time.\' What does healthy romantic waiting look like?','What does it mean to honor someone with your body and your words?'],apply:'Honest personal audit this week: What am I feeding my mind and desires through what I watch, scroll, or pursue?',pray:'Pray for purity of heart and mind.',note:'1-on-1 ONLY: This topic goes much deeper in 1-on-1 settings.'},
+  {id:'politics',num:6,title:'Kingdom Citizens in a Noisy World',sub:'Politics, Elections, Corruption & What Christians Owe Their Society',gen:'All — especially Gen X',passage:`<div class="passage-block"><div class="passage-header">Micah 6:8 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">8</span><mark>He has told you, O man, what is good; and what does the Lord require of you but to do justice, to love kindness, and to walk humbly with your God?</mark></span></div></div>`,scripture:'"Seek the peace and prosperity of the city... pray to the Lord for it."',ref:'Jeremiah 29:7',connect:'When you think about Philippine politics right now — what is your honest gut reaction?',discover:'Read Romans 13:1–7 and Micah 6:8.',questions:['Paul says governing authorities are \'established by God.\' That was written under Emperor Nero. Does that make it easier or harder to apply?','Micah 6:8: \'Act justly, love mercy, walk humbly.\' How does a Christian engage in politics with these as the standard?','Is it possible to vote, protest, or advocate politically without making politics your ultimate hope?','What does it look like to be a good citizen of Puerto Princesa?'],apply:'Do one small, concrete act of civic good in your community this week.',pray:'Pray for specific government leaders by name — locally and nationally.',note:'Keep the discussion on principles, not candidates.'},
+  {id:'creation',num:7,title:"This Is God's World",sub:'Climate Crisis, Creation & Filipino Ecological Responsibility',gen:'Gen Z — all ages welcome',passage:`<div class="passage-block"><div class="passage-header">Genesis 2:15 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">15</span><mark>Then the Lord God took the man and put him into the garden of Eden to cultivate it and keep it.</mark></span></div></div>`,scripture:'"The earth is the Lord\'s, and everything in it."',ref:'Psalm 24:1',connect:'What is one way that the natural beauty of Palawan has personally moved you?',discover:'Read Genesis 2:15 and Psalm 104:27–30.',questions:['Genesis 2:15 says God put humans in the garden \'to tend and keep it.\' What does faithful environmental stewardship look like today in Palawan?','How do you personally feel about climate change?','Palawan is under pressure — from mining, tourism, development. How should Christians engage?','If you truly believed the earth belonged to God — what would you do differently?'],apply:'Join or start one local care-for-creation initiative this month.',pray:'Pray for the specific natural treasures of Puerto Princesa.',note:'Environmental concern is very high among Gen Z — a genuine on-ramp to exploring a God who cares about the whole world.'},
+  {id:'family',num:8,title:'Honor, Obligation & Love',sub:'Filipino Family Pressure, Utang na Loob, Hiya & the Gospel of Grace',gen:'All — deeply Filipino in context',passage:`<div class="passage-block"><div class="passage-header">Ephesians 6:1, 4 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">1</span><mark>Children, obey your parents in the Lord, for this is right.</mark></span><span class="vline"><span class="vnum">4</span><mark>Fathers, do not provoke your children to anger, but bring them up in the discipline and instruction of the Lord.</mark></span></div></div>`,scripture:'"Honor your father and your mother... love one another as I have loved you."',ref:'Exodus 20:12 & John 13:34',connect:'Have you ever felt pressured to do something for your family that you knew wasn\'t right for you?',discover:'Read Luke 14:25–27 and Ephesians 6:1–4.',questions:['Jesus says \'If anyone comes to me and does not hate father and mother...\' What do you think He actually means?','How is the Filipino concept of \'utang na loob\' both beautiful and potentially harmful?','\'Hiya\' (shame) shapes so much Filipino behavior. How is gospel grace different?','How do you honor your family while still being honest about who God is calling you to be?'],apply:'Write a letter (you don\'t have to send it) to one family member — expressing both love and honesty.',pray:'Pray for specific family members by name.',note:'Help them find the third way: honor rooted in gospel love, not obligation rooted in fear.'},
+  {id:'work',num:9,title:'The Art of Stopping',sub:'Hustle Culture, Overwork, Burnout & the Biblical Sabbath',gen:'Millennials & Gen X',passage:`<div class="passage-block"><div class="passage-header">Exodus 20:8; Mark 2:27 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">8</span><mark>"Remember the sabbath day, to keep it holy."</mark></span><span class="vline"><mark>"The Sabbath was made for man, and not man for the Sabbath." (Mark 2:27)</mark></span></div></div>`,scripture:'"Remember the Sabbath day by keeping it holy."',ref:'Exodus 20:8',connect:'\'Hustle\' is glorified on social media. Do you think working harder = a better life?',discover:'Read Exodus 20:8–11 and Mark 2:27.',questions:['\'The Sabbath was made for man, not man for the Sabbath.\' What does that tell you about God\'s design for rest?','Why do you think rest feels so difficult — even guilty — for so many people?','What\'s the difference between laziness and Sabbath?','What would a regular rhythm of genuine rest look like in your life right now?'],apply:'Block out one non-negotiable window of intentional rest this week. No phone, no work, no productivity. Report how it felt.',pray:'Pray for your friend\'s specific work burden.',note:'Burnout is epidemic. Validate the pressure before presenting the solution.'},
+  {id:'grief',num:10,title:'When Someone Is Gone',sub:'Death, Grief, OFW Separation & the Hope of Resurrection',gen:'Gen X & older Millennials',passage:`<div class="passage-block"><div class="passage-header">John 11:35; 1 Thessalonians 4:13 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">35</span><mark>Jesus wept.</mark></span><span class="vline"><span class="vnum">13</span><mark>We do not want you to grieve as do the rest who have no hope.</mark></span></div></div>`,scripture:'"I am the resurrection and the life. Whoever believes in me will live, even though they die."',ref:'John 11:25',connect:'Is there someone significant you\'ve lost — through death, distance, or broken relationship?',discover:'Read John 11:28–44 and 1 Thessalonians 4:13–14.',questions:['The shortest verse: \'Jesus wept.\' He knew He was about to raise Lazarus — and He still wept. What does that tell you?','\'We grieve, but not like those who have no hope.\' What is the difference?','For OFW families: how do you process separation grief?'],apply:'Write the name of someone you are grieving. Sit with that name in prayer.',pray:'Pray by name for the person they are grieving.',note:'Sacred, slow session. No rush. Tissues may be needed.'},
+  {id:'faith',num:11,title:'When Faith Falls Apart',sub:'Deconstruction, Church Hurt, Unanswered Prayer & Honest Doubt',gen:'Gen Z & Millennials — all ages welcome',passage:`<div class="passage-block"><div class="passage-header">Mark 9:24 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">24</span><mark>Immediately the boy's father cried out and said, "I do believe; help my unbelief."</mark></span></div></div>`,scripture:'"I do believe; help me overcome my unbelief!"',ref:'Mark 9:24',connect:'Have you ever gone through a season of doubting God, the Bible, or the church?',discover:'Read Mark 9:17–27 and Habakkuk 1:2–4.',questions:['The father says \'I believe; help my unbelief\' in the same breath. Is that honest or hypocritical?','Habakkuk literally argues with God: \'Why do you make me look at injustice?\' God doesn\'t punish him. What does that tell you?','What is the difference between honest doubt and cynical rejection?','What has the church done that made faith harder?'],apply:'Write down your three biggest questions about God or the Bible. Don\'t try to answer them — just hold them in prayer.',pray:'Pray for honest faith. Pray specifically for the wounds from church experience they named.',note:'Respond to doubt with curiosity, not defensiveness.'},
+  {id:'purpose',num:12,title:'Your One Wild and Precious Life',sub:'Purpose, Calling, Quarter-Life & Mid-Life Crisis',gen:'All generations',passage:`<div class="passage-block"><div class="passage-header">Ephesians 2:10 · NASB</div><div class="passage-text"><span class="vline"><span class="vnum">10</span><mark>For we are His workmanship, created in Christ Jesus for good works, which God prepared beforehand so that we would walk in them.</mark></span></div></div>`,scripture:'"For we are God\'s handiwork, created in Christ Jesus to do good works."',ref:'Ephesians 2:10',connect:'\'If you could do anything with your life — anything — what would it be?\' Now: what\'s stopping you?',discover:'Read Jeremiah 29:11 and Ephesians 2:10.',questions:['\'For I know the plans I have for you\' — written to people in exile. What does it mean that God\'s plans survive our worst seasons?','\'Created to do good works which God prepared in advance\' — what do you think God has specifically wired YOU for?','What is the difference between your calling and your career?','How does the gospel change the pressure to \'find your purpose\'?'],apply:'Write: \'The good works God created me for include...\' Fill in 3–5 things — big and small.',pray:'Pray for your friend\'s specific calling and gifts — name them.',note:'Ideal for a final or milestone session — brings everything full circle.'},
+];
+
+/* ══ BUILD PICKER CARDS ══ */
+const guideColors = { genz: 'var(--genz)', mill: 'var(--mill)', genx: 'var(--genx)' };
+const catColors = {mental:'#3A6DB5',social:'#A0325A',tech:'#4A3E9A',money:'#3E6028',sex:'#8B2020',politics:'#1F4E6B',creation:'#1E6B42',family:'#A05010',work:'#7A2020',grief:'#444',faith:'#8B6000',purpose:'#6B2A8B'};
+
+function buildPicker(sessions, containerId, g, isRW) {
+  const grid = document.getElementById(containerId);
+  sessions.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'picker-card';
+    const color = isRW ? (catColors[s.id] || '#5C3D2E') : guideColors[g];
+    const num = isRW ? s.num : (i + 1);
+    card.innerHTML = `
+      <span class="picker-num" style="background:${color}">${num}</span>
+      <span class="picker-info"><span class="picker-title">${s.title}</span></span>
+      <span class="picker-arr">›</span>`;
+    card.onclick = () => openContent(s, g, num, isRW);
+    grid.appendChild(card);
+  });
+}
+
+buildPicker(genzSessions, 'picker-genz', 'genz', false);
+buildPicker(millSessions, 'picker-mill', 'mill', false);
+buildPicker(genxSessions, 'picker-genx', 'genx', false);
+buildPicker(rwTopics, 'picker-real', 'real', true);
+
+/* ══ OPEN CONTENT ══ */
+let _currentSessions = [], _currentIsRW = false, _currentG = null;
+
+function buildSessionNavBar(sessions, activeIdx, isRW, g) {
+  const scroll = document.getElementById('session-nav-scroll');
+  const colors = {genz:'#2D6A8F',mill:'#5C7A3E',genx:'#7A4A2A',real:'#5C3D2E'};
+  const color = colors[g] || '#5C3D2E';
+  scroll.innerHTML = '';
+  sessions.forEach((s, i) => {
+    const chip = document.createElement('button');
+    chip.className = 'session-nav-chip' + (i === activeIdx ? ' active' : '');
+    chip.textContent = (isRW ? s.num : (i + 1)) + ' · ' + s.title;
+    if (i === activeIdx) { chip.style.background = color; chip.style.color = 'white'; chip.style.borderColor = 'transparent'; }
+    chip.onclick = () => openContent(s, g, isRW ? s.num : i + 1, isRW, i);
+    scroll.appendChild(chip);
+  });
+  setTimeout(() => {
+    const active = scroll.querySelector('.active');
+    if (active) active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }, 60);
+}
+
+function openContent(s, g, num, isRW, idx) {
+  _currentSessions = isRW ? rwTopics : (g === 'genz' ? genzSessions : g === 'mill' ? millSessions : genxSessions);
+  _currentIsRW = isRW;
+  _currentG = g;
+  const activeIdx = idx !== undefined ? idx : (isRW ? s.num - 1 : num - 1);
+  const inner = document.getElementById('content-inner');
+  const backLabel = document.getElementById('content-back-label');
+  const guideNames = {genz:'Gen Z', mill:'Millennials', genx:'Gen X', real:'All Gen'};
+  backLabel.textContent = guideNames[g] || 'Back';
+
+  if (isRW) {
+    inner.innerHTML = `
+      <div class="rw-thdr" data-cat="${s.id}" style="margin-bottom:18px;">
+        <div class="rw-thdr-num">${s.num}</div>
+        <div class="th-n">Topic ${s.num} of 12 · Leader's Guide</div>
+        <h2>${s.title}</h2>
+        <p class="th-s">${s.sub}</p>
+        <div class="th-meta"><span class="th-chip">👥 ${s.gen}</span><span class="th-chip">📖 ${s.ref}</span><span class="th-chip">⏱ 45–75 min</span></div>
+      </div>
+      <div class="rw-scard">
+        <blockquote class="rw-scripture">${s.scripture}<cite>— ${s.ref}</cite></blockquote>
+        ${s.passage || ''}
+        <div class="s-part connect"><span class="s-part-label">Connect</span><p><em>${s.connect}</em></p></div>
+        <div class="s-part discover"><span class="s-part-label">Discover</span><p>${s.discover}</p><ul class="s-questions">${s.questions.map(q=>`<li>${q}</li>`).join('')}</ul></div>
+        <div class="s-part apply"><span class="s-part-label">Apply — This Week</span><p>${s.apply}</p></div>
+        <div class="s-part pray"><span class="s-part-label">Pray</span><p><em>${s.pray}</em></p></div>
+        <div class="rw-note">💡 <strong>Leader Note:</strong> ${s.note.replace(/\n/g,'<br><br>')}</div>
+      </div>`;
+  } else {
+    const gradients = {genz:'linear-gradient(135deg,#0D2233,#2D6A8F)',mill:'linear-gradient(135deg,#1A2810,#5C7A3E)',genx:'linear-gradient(135deg,#1A0A04,#7A4A2A)'};
+    inner.innerHTML = `
+      <div style="background:${gradients[g]||gradients.genz};border-radius:12px;padding:28px 24px;margin-bottom:18px;color:white;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:14px;top:-4px;font-family:'Cinzel',serif;font-size:72px;font-weight:600;opacity:0.1;line-height:1;">${num}</div>
+        <div style="font-family:'Cinzel',serif;font-size:clamp(11px,1.3vw,13px);letter-spacing:3px;opacity:0.65;margin-bottom:6px;text-transform:uppercase;">Session ${num} · Leader's Guide</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,38px);margin-bottom:5px;line-height:1.15;">${s.title}</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
+          <span style="padding:4px 10px;background:rgba(255,255,255,0.15);border-radius:100px;font-size:clamp(11px,1.2vw,13px);">📖 ${s.ref}</span>
+          <span style="padding:4px 10px;background:rgba(255,255,255,0.15);border-radius:100px;font-size:clamp(11px,1.2vw,13px);">⏱ 45–60 min</span>
+        </div>
+      </div>
+      <div class="rw-scard">
+        ${s.passage || ''}
+        <div class="s-part connect"><span class="s-part-label">Connect</span><p><em>${s.connect}</em></p></div>
+        <div class="s-part discover"><span class="s-part-label">Discover</span><p>${s.discover}</p><ul class="s-questions">${s.questions.map(q=>`<li>${q}</li>`).join('')}</ul></div>
+        <div class="s-part apply"><span class="s-part-label">Apply</span><p>${s.apply}</p></div>
+        <div class="s-part pray"><span class="s-part-label">Pray</span><p><em>${s.pray}</em></p></div>
+        ${s.tip ? `<div class="s-tip">💡 <strong>Leader Note:</strong> ${s.tip}</div>` : ''}
+      </div>`;
+  }
+
+  buildSessionNavBar(_currentSessions, activeIdx, isRW, g);
+  showScreen('content', true);
+  window.scrollTo({ top: 0 });
+  document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+  const tab = document.querySelector(`.main-tab[data-guide="${g}"]`);
+  if (tab) tab.classList.add('active');
+}
+
+/* ══ TIMER ══ */
+let _timerTotal = 45 * 60, _timerRemaining = 45 * 60, _timerRunning = false, _timerInterval = null;
+function timerFormat(s) { return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+function timerUpdateDisplay() {
+  const el = document.getElementById('timer-display'), btn = document.getElementById('timer-play-btn');
+  if (!el) return;
+  el.textContent = timerFormat(_timerRemaining);
+  el.classList.toggle('running', _timerRunning && _timerRemaining > 0);
+  el.classList.toggle('warning', _timerRemaining <= 300 && _timerRemaining > 0);
+  btn.textContent = _timerRunning ? '⏸' : '▶';
+}
+function timerToggle() {
+  if (_timerRemaining <= 0) { timerReset(); return; }
+  _timerRunning = !_timerRunning;
+  if (_timerRunning) {
+    _timerInterval = setInterval(() => {
+      if (_timerRemaining > 0) { _timerRemaining--; timerUpdateDisplay(); }
+      else { _timerRunning = false; clearInterval(_timerInterval); timerUpdateDisplay(); }
+    }, 1000);
+  } else { clearInterval(_timerInterval); }
+  timerUpdateDisplay();
+}
+function timerReset() {
+  clearInterval(_timerInterval); _timerRunning = false; _timerRemaining = _timerTotal;
+  const el = document.getElementById('timer-display'); if (el) el.style.color = '';
+  timerUpdateDisplay();
+}
+function timerSetMin(min) {
+  clearInterval(_timerInterval); _timerRunning = false; _timerTotal = min * 60; _timerRemaining = _timerTotal;
+  const el = document.getElementById('timer-display'); if (el) el.style.color = '';
+  document.querySelectorAll('.timer-preset').forEach(b => b.classList.toggle('active-preset', b.textContent === min + ' min'));
+  timerUpdateDisplay(); timerCloseSet();
+}
+function timerSetCustom() {
+  const m = parseInt(document.getElementById('timer-custom-min').value)||0;
+  const s = parseInt(document.getElementById('timer-custom-sec').value)||0;
+  const total = m*60+s; if (total<=0) return;
+  clearInterval(_timerInterval); _timerRunning = false; _timerTotal = total; _timerRemaining = total;
+  const el = document.getElementById('timer-display'); if (el) el.style.color = '';
+  document.querySelectorAll('.timer-preset').forEach(b => b.classList.remove('active-preset'));
+  timerUpdateDisplay(); timerCloseSet();
+}
+function timerToggleSet() { document.getElementById('timer-set-row')?.classList.toggle('open'); }
+function timerCloseSet() { document.getElementById('timer-set-row')?.classList.remove('open'); }
+document.addEventListener('click', e => {
+  const row = document.getElementById('timer-set-row'), widget = document.querySelector('.timer-widget');
+  if (row?.classList.contains('open') && widget && !widget.contains(e.target)) row.classList.remove('open');
+});
+
+/* ══ SCROLL HIDE NAV ══ */
+let _lastScrollY = 0, _scrollTimer = null;
+window.addEventListener('scroll', () => {
+  const bar = document.getElementById('session-nav-bar');
+  if (!bar?.classList.contains('visible')) return;
+  const y = window.scrollY;
+  if (y > _lastScrollY + 4) bar.classList.add('scrolled-away');
+  else if (y < _lastScrollY - 4) bar.classList.remove('scrolled-away');
+  _lastScrollY = y;
+  clearTimeout(_scrollTimer);
+  _scrollTimer = setTimeout(() => bar.classList.remove('scrolled-away'), 1200);
+}, { passive: true });
+
+/* ══ KEYDOWN for gospel ══ */
+document.addEventListener('keydown', e => {
+  const player = document.getElementById('gospel-player');
+  if (!player.classList.contains('open')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') gpNav(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') gpNav(-1);
+  if (e.key === 'Escape') closeGospel();
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  new QRCode(document.getElementById('qr-code'), {
+    text: 'https://disciplesheep.github.io/Leader-Guide-v1/',
+    width: 180,
+    height: 180,
+    colorDark: '#1A1208',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+</script>
+
+<script>
+/* ══ LOCK SCREEN ══ */
+(function () {
+  const HASH        = 'c1bfbb1848b3a7970cb33f4ff93b222a4e4c77d82dc92210e1e6e73fee6ad162';
+  const SESSION_KEY = 'ds_unlocked';
+  const CRED_KEY    = 'ds_fp_cred';   // stores base64 credentialId
+  const RP_ID       = location.hostname || 'localhost';
+  const RP_NAME     = 'Disciplesheep Leader Guide';
+  const MAX_ATTEMPTS = 3;
+  const LOCKOUT_SECS = 30;
+
+  let attempts   = 0;
+  let lockedOut  = false;
+  let lockoutTimer = null;
+  let eyeVisible = false;
+  let fpSupported = false;
+
+  /* ── helpers ──────────────────────────────────────────── */
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+  function b64url(buf) {
+    return btoa(String.fromCharCode(...new Uint8Array(buf)))
+      .replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+  }
+  function fromB64url(s) {
+    s = s.replace(/-/g,'+').replace(/_/g,'/');
+    return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  }
+  function unlockApp() {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    const ls = document.getElementById('lock-screen');
+    ls.classList.add('unlocking');
+    setTimeout(() => ls.classList.add('hidden'), 620);
+  }
+  function setFpHint(msg) {
+    const el = document.getElementById('lock-fp-hint');
+    if (el) el.textContent = msg;
+  }
+  function setFpLabel(msg) {
+    const el = document.getElementById('lock-fp-label');
+    if (el) el.textContent = msg;
+  }
+
+  /* ── check biometric support ──────────────────────────── */
+  async function checkFpSupport() {
+    if (!window.PublicKeyCredential) return false;
+    if (!window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable) return false;
+    return await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+  }
+
+  /* ── register fingerprint (called after password unlock) ─ */
+  async function registerFingerprint() {
+    try {
+      const userId = new Uint8Array(16);
+      crypto.getRandomValues(userId);
+      const cred = await navigator.credentials.create({
+        publicKey: {
+          rp: { id: RP_ID, name: RP_NAME },
+          user: { id: userId, name: 'leader', displayName: 'Leader' },
+          challenge: crypto.getRandomValues(new Uint8Array(32)),
+          pubKeyCredParams: [
+            { type: 'public-key', alg: -7  },
+            { type: 'public-key', alg: -257 }
+          ],
+          authenticatorSelection: {
+            authenticatorAttachment: 'platform',
+            userVerification: 'required',
+            residentKey: 'preferred'
+          },
+          timeout: 60000
+        }
+      });
+      if (cred) {
+        localStorage.setItem(CRED_KEY, b64url(cred.rawId));
+      }
+    } catch(e) { /* silently ignore — fingerprint registration optional */ }
+  }
+
+  /* ── authenticate with fingerprint ───────────────────── */
+  window.lockFingerprintAuth = async function () {
+    const btn = document.getElementById('lock-fp-btn');
+    btn.classList.add('scanning');
+    setFpLabel('Scanning…');
+    setFpHint('');
+    try {
+      const credIdB64 = localStorage.getItem(CRED_KEY);
+      const allowCreds = credIdB64
+        ? [{ type: 'public-key', id: fromB64url(credIdB64), transports: ['internal'] }]
+        : [];
+      await navigator.credentials.get({
+        publicKey: {
+          rpId: RP_ID,
+          challenge: crypto.getRandomValues(new Uint8Array(32)),
+          userVerification: 'required',
+          allowCredentials: allowCreds,
+          timeout: 60000
+        }
+      });
+      btn.classList.remove('scanning');
+      btn.classList.add('success');
+      setFpLabel('Verified ✓');
+      setTimeout(unlockApp, 400);
+    } catch(e) {
+      btn.classList.remove('scanning');
+      if (e.name === 'NotAllowedError') {
+        // User cancelled or timed out — offer password
+        setFpHint('Fingerprint cancelled.');
+        setFpLabel('Touch to retry');
+      } else {
+        btn.classList.add('fail');
+        setFpHint('Try again or use password.');
+        setFpLabel('Touch to unlock');
+        setTimeout(() => btn.classList.remove('fail'), 500);
+      }
+    }
+  };
+
+  /* ── show/hide views ──────────────────────────────────── */
+  window.lockShowPassword = function () {
+    document.getElementById('lock-fp-card').style.display = 'none';
+    document.getElementById('lock-card').style.display = 'block';
+    const backBtn = document.getElementById('lock-back-fp');
+    if (backBtn && fpSupported) backBtn.style.display = 'block';
+    setTimeout(() => document.getElementById('lock-input').focus(), 100);
+  };
+  window.lockShowFingerprint = function () {
+    document.getElementById('lock-card').style.display = 'none';
+    document.getElementById('lock-fp-card').style.display = 'block';
+  };
+
+  /* ── password submit ──────────────────────────────────── */
+  window.lockSubmit = async function () {
+    if (lockedOut) return;
+    const input = document.getElementById('lock-input');
+    const val = input.value.trim();
+    if (!val) { showError('Please enter the password.'); shakePw(); return; }
+    const hash = await sha256(val);
+    if (hash === HASH) {
+      // Register fingerprint on first password success (if supported)
+      if (fpSupported && !localStorage.getItem(CRED_KEY)) {
+        registerFingerprint();
+      }
+      unlockApp();
+    } else {
+      attempts++;
+      shakePw();
+      input.value = '';
+      if (attempts >= MAX_ATTEMPTS) {
+        startLockout();
+      } else {
+        const left = MAX_ATTEMPTS - attempts;
+        showError('Incorrect password.');
+        document.getElementById('lock-attempts').textContent =
+          left === 1 ? '1 attempt remaining' : left + ' attempts remaining';
+      }
+    }
+  };
+
+  window.lockToggleEye = function () {
+    eyeVisible = !eyeVisible;
+    const input = document.getElementById('lock-input');
+    input.type = eyeVisible ? 'text' : 'password';
+    document.getElementById('lock-eye-icon').innerHTML = eyeVisible
+      ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
+      : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  };
+
+  function showError(msg) { document.getElementById('lock-error').textContent = msg; }
+  function shakePw() {
+    const input = document.getElementById('lock-input');
+    input.classList.remove('error');
+    void input.offsetWidth;
+    input.classList.add('error');
+    setTimeout(() => input.classList.remove('error'), 500);
+  }
+  function startLockout() {
+    lockedOut = true;
+    document.getElementById('lock-card').classList.add('lock-locked-out');
+    document.getElementById('lock-attempts').textContent = '';
+    let secs = LOCKOUT_SECS;
+    document.getElementById('lock-countdown').textContent = secs;
+    lockoutTimer = setInterval(() => {
+      secs--;
+      document.getElementById('lock-countdown').textContent = secs;
+      if (secs <= 0) {
+        clearInterval(lockoutTimer);
+        lockedOut = false;
+        attempts = 0;
+        document.getElementById('lock-card').classList.remove('lock-locked-out');
+        document.getElementById('lock-error').textContent = '';
+      }
+    }, 1000);
+  }
+
+  /* ── init ─────────────────────────────────────────────── */
+  (async function init() {
+    if (sessionStorage.getItem(SESSION_KEY) === '1') {
+      document.getElementById('lock-screen').classList.add('hidden');
+      return;
+    }
+    fpSupported = await checkFpSupport();
+    const hasCred = !!localStorage.getItem(CRED_KEY);
+
+    if (fpSupported && hasCred) {
+      // Fingerprint first — auto-trigger
+      document.getElementById('lock-fp-card').style.display = 'block';
+      document.getElementById('lock-card').style.display = 'none';
+      setTimeout(lockFingerprintAuth, 600);
+    } else if (fpSupported && !hasCred) {
+      // Supported but not yet registered — go straight to password
+      // After unlock, fingerprint will be registered for next time
+      document.getElementById('lock-fp-card').style.display = 'none';
+      document.getElementById('lock-card').style.display = 'block';
+      document.getElementById('lock-pw-label').textContent = 'Enter Access Password';
+      setTimeout(() => document.getElementById('lock-input').focus(), 700);
+    } else {
+      // Not supported — password only, hide fp card
+      document.getElementById('lock-fp-card').style.display = 'none';
+      document.getElementById('lock-card').style.display = 'block';
+      setTimeout(() => document.getElementById('lock-input').focus(), 700);
+    }
+  })();
+})();
+</script>
+
+
+<script>
+/* ══ COPY PROTECTION ══ */
+(function () {
+  // Block right-click context menu
+  document.addEventListener('contextmenu', function(e) {
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+    }
+  });
+  // Block copy & cut
+  document.addEventListener('copy', function(e) {
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+    }
+  });
+  document.addEventListener('cut', function(e) {
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+    }
+  });
+  // Block select-all keyboard shortcut (Ctrl+A / Cmd+A)
+  document.addEventListener('keydown', function(e) {
+    const tag = e.target.tagName;
+    if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+      if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+        e.preventDefault();
+      }
+    }
+    // Block Ctrl+C / Cmd+C
+    if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+      if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+        e.preventDefault();
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
